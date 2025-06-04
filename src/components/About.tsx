@@ -35,7 +35,7 @@ const About: React.FC = () => {
           className='max-w-4xl mx-auto'
         >
           <motion.div variants={itemVariants} className='text-center mb-16'>
-            <h2 className='font-display text-3xl md:text-4xl font-bold mb-6'>
+            <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-6'>
               About <span className='title-gradient'>Me</span>
             </h2>
             <p className='text-lg text-gray-400 max-w-3xl mx-auto'>
@@ -49,7 +49,9 @@ const About: React.FC = () => {
             <div className='absolute inset-0 -z-10 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-xl blur opacity-30'></div>
 
             <div className='mb-8'>
-              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-display'>My Journey</h3>
+              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>
+                My Journey
+              </h3>
               <p className='text-gray-300 mb-4 leading-relaxed'>
                 I've collaborated with innovative startups and established companies to build
                 robust, scalable applications that solve real-world problems. My approach combines
@@ -65,7 +67,7 @@ const About: React.FC = () => {
             </div>
 
             <div>
-              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-display'>What I Do</h3>
+              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>What I Do</h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
                   <h4 className='text-indigo-400 font-medium mb-2'>Frontend Excellence</h4>

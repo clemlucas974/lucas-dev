@@ -79,7 +79,7 @@ const Projects: FC = () => {
           transition={{ duration: 0.6 }}
           className='text-center mb-16'
         >
-          <h2 className='font-display text-3xl md:text-4xl font-bold mb-4'>
+          <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
             Featured <span className='title-gradient'>Projects</span>
           </h2>
           <p className='text-gray-400 max-w-3xl mx-auto'>
@@ -113,7 +113,7 @@ const Projects: FC = () => {
                 />
               </div>
               <div className='p-6'>
-                <h3 className='text-xl font-display font-semibold mb-2 text-white'>
+                <h3 className='text-xl font-electrolize font-semibold mb-2 text-white'>
                   {project.title}
                 </h3>
                 <p className='text-gray-400 mb-4 line-clamp-2'>{project.description}</p>
@@ -154,7 +154,7 @@ const Projects: FC = () => {
                 />
               </div>
               <div className='p-6 md:p-8'>
-                <h3 className='text-2xl font-display font-bold mb-4 text-white'>
+                <h3 className='text-2xl font-electrolize font-bold mb-4 text-white'>
                   {activeProject.title}
                 </h3>
                 <p className='text-gray-300 mb-6'>{activeProject.details}</p>

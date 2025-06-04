@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
@@ -29,7 +29,7 @@ const Hero: FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 font-display'
+              className=' sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 font-electrolize text-base/5'
             >
               Building
               <span className='title-gradient'> exceptional </span>
@@ -116,7 +116,7 @@ const Hero: FC = () => {
               <div className='absolute inset-1 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-30'></div>
               <div className='absolute inset-[3px] rounded-full bg-slate-900 flex items-center justify-center'>
                 <div className='text-center'>
-                  <div className='text-4xl sm:text-5xl md:text-6xl font-display font-bold title-gradient mb-2'>
+                  <div className='text-4xl sm:text-5xl md:text-6xl font-electrolize font-bold title-gradient mb-2'>
                     &lt;/&gt;
                   </div>
                   <p className='text-gray-300 text-xs sm:text-sm md:text-base uppercase font-bold'>

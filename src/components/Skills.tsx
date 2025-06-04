@@ -85,7 +85,7 @@ const Skills: FC = () => {
             transition={{ duration: 0.6 }}
             className='text-center mb-12'
           >
-            <h2 className='font-display text-3xl md:text-4xl font-bold mb-4'>
+            <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
               My <span className='title-gradient'>Skills</span>
             </h2>
             <p className='text-gray-400 max-w-3xl mx-auto'>
