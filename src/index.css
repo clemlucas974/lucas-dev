@@ -68,7 +68,7 @@
   .title-gradient {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 font-clash;
   }
-  
+
   .tech-pill {
     @apply px-3 py-1 rounded-full text-xs font-medium bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 transition-colors;
   }
@@ -86,7 +86,11 @@
 }
 
 .hero-gradient {
-  background: radial-gradient(circle at top center, rgba(129, 140, 248, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+  background: radial-gradient(
+    circle at top center,
+    rgba(129, 140, 248, 0.1) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
 }
 
 .glow {
