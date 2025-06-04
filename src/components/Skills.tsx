@@ -1,67 +1,79 @@
-import React, { useState } from 'react';
+import { type FC, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
+interface Skill {
+  name: string;
+  category: 'all' | 'frontend' | 'backend' | 'devops' | 'other';
+  level: number;
+}
+
+interface Category {
+  id: string;
+  label: string;
+}
+
+const categories: Category[] = [
+  { id: 'all', label: 'All' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'devops', label: 'DevOps' },
+  { id: 'other', label: 'Other' },
+];
+
+const skills: Skill[] = [
+  { name: 'React', category: 'frontend', level: 95 },
+  { name: 'TypeScript', category: 'frontend', level: 90 },
+  { name: 'Next.js', category: 'frontend', level: 85 },
+  { name: 'CSS/SCSS', category: 'frontend', level: 90 },
+  { name: 'Tailwind CSS', category: 'frontend', level: 95 },
+  { name: 'React Native', category: 'frontend', level: 80 },
+
+  { name: 'Node.js', category: 'backend', level: 90 },
+  { name: 'Go', category: 'backend', level: 75 },
+  { name: 'GraphQL', category: 'backend', level: 85 },
+  { name: 'NestJS', category: 'backend', level: 85 },
+  { name: 'PostgreSQL', category: 'backend', level: 90 },
+  { name: 'Redis', category: 'backend', level: 90 },
+  { name: 'MongoDB', category: 'backend', level: 80 },
+
+  { name: 'AWS', category: 'devops', level: 85 },
+  { name: 'Terraform', category: 'devops', level: 80 },
+  { name: 'Kubernetes', category: 'devops', level: 80 },
+  { name: 'Docker', category: 'devops', level: 90 },
+  { name: 'CI/CD', category: 'devops', level: 90 },
+  { name: 'Github Actions', category: 'devops', level: 85 },
+
+  { name: 'System Design', category: 'other', level: 90 },
+  { name: 'Team Leadership', category: 'other', level: 85 },
+  { name: 'Agile/Scrum', category: 'other', level: 80 },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const Skills: FC = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
 
-  const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'devops', label: 'DevOps' },
-    { id: 'other', label: 'Other' },
-  ];
-
-  const skills = [
-    { name: 'React', category: 'frontend', level: 95 },
-    { name: 'TypeScript', category: 'frontend', level: 90 },
-    { name: 'Next.js', category: 'frontend', level: 85 },
-    { name: 'CSS/SCSS', category: 'frontend', level: 90 },
-    { name: 'Tailwind CSS', category: 'frontend', level: 95 },
-    { name: 'React Native', category: 'frontend', level: 80 },
-
-    { name: 'Node.js', category: 'backend', level: 90 },
-    { name: 'GraphQL', category: 'backend', level: 85 },
-    { name: 'NestJS', category: 'backend', level: 85 },
-    { name: 'PostgreSQL', category: 'backend', level: 90 },
-    { name: 'Redis', category: 'backend', level: 80 },
-    { name: 'MongoDB', category: 'backend', level: 75 },
-
-    { name: 'AWS', category: 'devops', level: 85 },
-    { name: 'Terraform', category: 'devops', level: 80 },
-    { name: 'Kubernetes', category: 'devops', level: 80 },
-    { name: 'Docker', category: 'devops', level: 85 },
-    { name: 'CI/CD', category: 'devops', level: 90 },
-    { name: 'Github Actions', category: 'devops', level: 85 },
-
-    { name: 'System Design', category: 'other', level: 90 },
-    { name: 'Team Leadership', category: 'other', level: 85 },
-    { name: 'Agile/Scrum', category: 'other', level: 80 },
-  ];
-
   const filteredSkills =
     activeCategory === 'all' ? skills : skills.filter((skill) => skill.category === activeCategory);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
 
   return (
     <section id='skills' className='section bg-slate-950 relative'>

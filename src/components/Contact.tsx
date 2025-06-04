@@ -18,6 +18,36 @@ interface ContactInfo {
   link: string | null;
 }
 
+const contactInfo: ContactInfo[] = [
+  {
+    icon: <FiMail className='h-6 w-6 text-indigo-400' />,
+    title: 'Email',
+    content: 'contact@developer.com',
+    link: 'mailto:contact@developer.com',
+  },
+  {
+    icon: <FiMapPin className='h-6 w-6 text-purple-400' />,
+    title: 'Location',
+    content: 'Paris, France',
+    link: null,
+  },
+];
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState<FormState>({
     name: '',
@@ -61,49 +91,22 @@ const Contact: React.FC = () => {
     }, 1500);
   };
 
-  const contactInfo: ContactInfo[] = [
-    {
-      icon: <FiMail className='h-6 w-6 text-indigo-400' />,
-      title: 'Email',
-      content: 'contact@developer.com',
-      link: 'mailto:contact@developer.com',
-    },
-    {
-      icon: <FiMapPin className='h-6 w-6 text-purple-400' />,
-      title: 'Location',
-      content: 'Paris, France',
-      link: null,
-    },
-  ];
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
-    <section id='contact' className='section bg-gradient-to-b from-slate-950 to-slate-900 relative'>
-      <div className='container'>
+    <section
+      id='contact'
+      className='section bg-gradient-to-b from-slate-950 to-slate-900 relative py-16 sm:py-20'
+    >
+      <div className='container px-4 sm:px-6 lg:px-8'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className='text-center mb-16'
+          className='text-center mb-12 sm:mb-16'
         >
-          <h2 className='font-display text-3xl md:text-4xl font-bold mb-4'>
+          <h2 className='font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4'>
             Let's <span className='title-gradient'>Connect</span>
           </h2>
-          <p className='text-gray-400 max-w-2xl mx-auto'>
+          <p className='text-sm sm:text-base text-gray-400 max-w-2xl mx-auto'>
             Have a project in mind or want to discuss potential opportunities? I'd love to hear from
             you. Drop me a message and I'll get back to you as soon as possible.
           </p>
@@ -114,42 +117,46 @@ const Contact: React.FC = () => {
           variants={containerVariants}
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
-          className='grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto'
+          className='grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 max-w-6xl mx-auto'
         >
           <motion.div variants={itemVariants} className='lg:col-span-2'>
-            <div className='glass-card p-6 md:p-8'>
-              <h3 className='text-xl font-display font-semibold mb-6'>Contact Information</h3>
+            <div className='glass-card p-5 sm:p-6 md:p-8'>
+              <h3 className='text-lg sm:text-xl font-display font-semibold mb-4 sm:mb-6'>
+                Contact Information
+              </h3>
 
-              <div className='space-y-6'>
+              <div className='space-y-4 sm:space-y-6'>
                 {contactInfo.map((info, index) => (
                   <div key={index} className='flex items-start'>
-                    <div className='mt-1 bg-slate-800 rounded-lg p-3'>{info.icon}</div>
-                    <div className='ml-4'>
-                      <h4 className='text-sm font-medium text-gray-400'>{info.title}</h4>
+                    <div className='mt-1 bg-slate-800 rounded-lg p-2 sm:p-3'>{info.icon}</div>
+                    <div className='ml-3 sm:ml-4'>
+                      <h4 className='text-xs sm:text-sm font-medium text-gray-400'>{info.title}</h4>
                       {info.link ? (
                         <a
                           href={info.link}
-                          className='text-base text-white hover:text-indigo-400 transition-colors'
+                          className='text-sm sm:text-base text-white hover:text-indigo-400 transition-colors'
                         >
                           {info.content}
                         </a>
                       ) : (
-                        <p className='text-base text-white'>{info.content}</p>
+                        <p className='text-sm sm:text-base text-white'>{info.content}</p>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className='mt-10'>
-                <h3 className='text-xl font-display font-semibold mb-4'>Follow Me</h3>
-                <div className='flex space-x-4'>
+              <div className='mt-8 sm:mt-10'>
+                <h3 className='text-lg sm:text-xl font-display font-semibold mb-3 sm:mb-4'>
+                  Follow Me
+                </h3>
+                <div className='flex space-x-3 sm:space-x-4'>
                   <a
                     href='#'
-                    className='bg-slate-800 p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
-                      className='h-5 w-5'
+                      className='h-4 w-4 sm:h-5 sm:w-5'
                       fill='currentColor'
                       viewBox='0 0 24 24'
                       aria-hidden='true'
@@ -163,10 +170,10 @@ const Contact: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='bg-slate-800 p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
-                      className='h-5 w-5'
+                      className='h-4 w-4 sm:h-5 sm:w-5'
                       fill='currentColor'
                       viewBox='0 0 24 24'
                       aria-hidden='true'
@@ -176,10 +183,10 @@ const Contact: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='bg-slate-800 p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
-                      className='h-5 w-5'
+                      className='h-4 w-4 sm:h-5 sm:w-5'
                       fill='currentColor'
                       viewBox='0 0 24 24'
                       aria-hidden='true'
@@ -193,10 +200,10 @@ const Contact: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='bg-slate-800 p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
-                      className='h-5 w-5'
+                      className='h-4 w-4 sm:h-5 sm:w-5'
                       fill='currentColor'
                       viewBox='0 0 24 24'
                       aria-hidden='true'
@@ -214,16 +221,16 @@ const Contact: React.FC = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className='lg:col-span-3'>
-            <div className='glass-card p-6 md:p-8 h-full'>
+            <div className='glass-card p-5 sm:p-6 md:p-8 h-full'>
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className='flex flex-col items-center justify-center h-full text-center'
                 >
-                  <div className='w-16 h-16 mb-4 rounded-full bg-green-500/20 flex items-center justify-center'>
+                  <div className='w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 rounded-full bg-green-500/20 flex items-center justify-center'>
                     <svg
-                      className='w-8 h-8 text-green-500'
+                      className='w-7 h-7 sm:w-8 sm:h-8 text-green-500'
                       fill='none'
                       stroke='currentColor'
                       viewBox='0 0 24 24'
@@ -237,20 +244,24 @@ const Contact: React.FC = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className='text-2xl font-semibold text-white mb-2'>Message Sent!</h3>
-                  <p className='text-gray-400'>
+                  <h3 className='text-xl sm:text-2xl font-semibold text-white mb-2'>
+                    Message Sent!
+                  </h3>
+                  <p className='text-sm sm:text-base text-gray-400'>
                     Thank you for reaching out. I'll get back to you as soon as possible.
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className='space-y-6'>
-                  <h3 className='text-xl font-display font-semibold mb-6'>Send a Message</h3>
+                <form onSubmit={handleSubmit} className='space-y-4 sm:space-y-6'>
+                  <h3 className='text-lg sm:text-xl font-display font-semibold mb-4 sm:mb-6'>
+                    Send a Message
+                  </h3>
 
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                     <div>
                       <label
                         htmlFor='name'
-                        className='block text-sm font-medium text-gray-400 mb-1'
+                        className='block text-xs sm:text-sm font-medium text-gray-400 mb-1'
                       >
                         Name
                       </label>
@@ -261,14 +272,14 @@ const Contact: React.FC = () => {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className='w-full bg-slate-800 border border-slate-700 text-white placeholder:text-gray-500 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
+                        className='w-full bg-slate-800 border border-slate-700 text-sm sm:text-base text-white placeholder:text-gray-500 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
                         placeholder='Your name'
                       />
                     </div>
                     <div>
                       <label
                         htmlFor='email'
-                        className='block text-sm font-medium text-gray-400 mb-1'
+                        className='block text-xs sm:text-sm font-medium text-gray-400 mb-1'
                       >
                         Email
                       </label>
@@ -279,7 +290,7 @@ const Contact: React.FC = () => {
                         value={formState.email}
                         onChange={handleChange}
                         required
-                        className='w-full bg-slate-800 border border-slate-700 text-white placeholder:text-gray-500 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
+                        className='w-full bg-slate-800 border border-slate-700 text-sm sm:text-base text-white placeholder:text-gray-500 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
                         placeholder='Your email'
                       />
                     </div>
@@ -288,7 +299,7 @@ const Contact: React.FC = () => {
                   <div>
                     <label
                       htmlFor='subject'
-                      className='block text-sm font-medium text-gray-400 mb-1'
+                      className='block text-xs sm:text-sm font-medium text-gray-400 mb-1'
                     >
                       Subject
                     </label>
@@ -299,7 +310,7 @@ const Contact: React.FC = () => {
                       value={formState.subject}
                       onChange={handleChange}
                       required
-                      className='w-full bg-slate-800 border border-slate-700 text-white placeholder:text-gray-500 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
+                      className='w-full bg-slate-800 border border-slate-700 text-sm sm:text-base text-white placeholder:text-gray-500 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition'
                       placeholder="What's this about?"
                     />
                   </div>
@@ -307,7 +318,7 @@ const Contact: React.FC = () => {
                   <div>
                     <label
                       htmlFor='message'
-                      className='block text-sm font-medium text-gray-400 mb-1'
+                      className='block text-xs sm:text-sm font-medium text-gray-400 mb-1'
                     >
                       Message
                     </label>
@@ -317,8 +328,8 @@ const Contact: React.FC = () => {
                       value={formState.message}
                       onChange={handleChange}
                       required
-                      rows={6}
-                      className='w-full bg-slate-800 border border-slate-700 text-white placeholder:text-gray-500 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none'
+                      rows={5}
+                      className='w-full bg-slate-800 border border-slate-700 text-sm sm:text-base text-white placeholder:text-gray-500 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none'
                       placeholder='Your message here...'
                     />
                   </div>
@@ -327,22 +338,22 @@ const Contact: React.FC = () => {
                     <button
                       type='submit'
                       disabled={isSubmitting}
-                      className={`button-primary w-full ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      className={`button-primary w-full text-sm sm:text-base py-2 sm:py-2.5 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
                       {isSubmitting ? (
                         <div className='flex items-center justify-center'>
                           <svg
-                            className='animate-spin -ml-1 mr-3 h-5 w-5 text-white\'
-                            xmlns='http://www.w3.org/2000/svg\'
-                            fill='none\'
+                            className='animate-spin -ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white'
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
                             viewBox='0 0 24 24'
                           >
                             <circle
-                              className='opacity-25\'
-                              cx='12\'
-                              cy='12\'
-                              r='10\'
-                              stroke='currentColor\'
+                              className='opacity-25'
+                              cx='12'
+                              cy='12'
+                              r='10'
+                              stroke='currentColor'
                               strokeWidth='4'
                             ></circle>
                             <path

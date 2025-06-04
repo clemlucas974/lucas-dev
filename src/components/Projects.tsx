@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import { type FC, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const projects = [
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  details: string;
+  image: string;
+  technologies: string[];
+  link: string;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     title: 'SEKAI',
@@ -39,8 +49,8 @@ const projects = [
   },
 ];
 
-const Projects = () => {
-  const [activeProject, setActiveProject] = useState(null);
+const Projects: FC = () => {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,

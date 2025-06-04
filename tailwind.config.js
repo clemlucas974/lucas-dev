@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: "class",
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -58,7 +55,7 @@ export default {
         'slide-up': 'slide-up 0.5s ease-out forwards',
         'slide-down': 'slide-down 0.5s ease-out forwards',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 3s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
       },
       keyframes: {
         'fade-in': {
@@ -77,15 +74,15 @@ export default {
           '0%': { transform: 'translateY(-20px)' },
           '100%': { transform: 'translateY(0)' },
         },
-        'float': {
+        float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      }
+      },
     },
   },
   plugins: [],
-}
+};

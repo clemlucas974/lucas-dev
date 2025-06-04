@@ -1,22 +1,7 @@
 import React from 'react';
 
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-
-interface ContainerVariants {
-  hidden: { opacity: number };
-  visible: {
-    opacity: number;
-    transition: {
-      staggerChildren: number;
-    };
-  };
-}
-
-interface ItemVariants {
-  hidden: { opacity: number; y: number };
-  visible: { opacity: number; y: number; transition: { duration: number } };
-}
 
 const About: React.FC = () => {
   const { ref, inView } = useInView({
@@ -24,7 +9,7 @@ const About: React.FC = () => {
     triggerOnce: true,
   });
 
-  const containerVariants: ContainerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -34,7 +19,7 @@ const About: React.FC = () => {
     },
   };
 
-  const itemVariants: ItemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
@@ -99,8 +84,7 @@ const About: React.FC = () => {
                 <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
                   <h4 className='text-teal-400 font-medium mb-2'>DevOps & Infrastructure</h4>
                   <p className='text-gray-400'>
-                    Build robust CI/CD pipelines and cloud infrastructure using Terraform,
-                    Kubernetes, and AWS services.
+                    Build robust CI/CD pipelines and cloud infrastructure.
                   </p>
                 </div>
                 <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
