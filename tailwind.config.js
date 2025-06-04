@@ -7,6 +7,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         display: ['"Clash Display"', 'sans-serif'],
+        electrolize: ['Electrolize', 'sans-serif'],
       },
       colors: {
         primary: {

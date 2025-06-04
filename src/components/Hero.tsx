@@ -119,7 +119,7 @@ const Hero: FC = () => {
                   <div className='text-4xl sm:text-5xl md:text-6xl font-display font-bold title-gradient mb-2'>
                     &lt;/&gt;
                   </div>
-                  <p className='text-gray-300 text-xs sm:text-sm md:text-base'>
+                  <p className='text-gray-300 text-xs sm:text-sm md:text-base uppercase font-bold'>
                     10+ years experience
                   </p>
                 </div>

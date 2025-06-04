@@ -8,11 +8,11 @@ const Footer: FC = () => {
   return (
     <footer className='bg-slate-950 py-8 sm:py-12 border-t border-slate-800/50'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-8'>
           <div className='sm:col-span-2'>
             <a
               href='#'
-              className='text-xl sm:text-2xl font-bold text-gradient font-display mb-3 sm:mb-4 inline-block'
+              className='text-xl sm:text-2xl font-bold text-gradient mb-3 sm:mb-4 inline-block font-electrolize'
             >
               &lt;LUCAS.DEV/&gt;
             </a>
@@ -134,7 +134,7 @@ const Footer: FC = () => {
             <ul className='space-y-3 sm:space-y-4'>
               <li className='flex items-start'>
                 <svg
-                  className='h-4 w-4 sm:h-5 sm:w-5 text-indigo-400 mt-0.5'
+                  className='min-h-4 min-w-4 h-4 w-4 sm:min-h-5 sm:min-w-5 sm:h-5 sm:w-5 text-indigo-400 mt-0.5'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'

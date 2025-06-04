@@ -16,36 +16,35 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'SEKAI',
-    description:
-      'Next-level entertainment for Anime fans between episodes, built in partnership with major Japanese licensors.',
+    title: 'Naruto Ninja Cards',
+    description: 'The only official Naruto digital collection.',
     details:
-      'SEKAI is built in partnerships with major Japanese Anime licensors and backed by world-class investors and public figures including Alexis Ohanian (reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games). The company has offices in Paris and Tokyo.',
-    image: 'https://images.pexels.com/photos/2103127/pexels-photo-2103127.jpeg',
-    technologies: ['React', 'TypeScript', 'Node.js', 'GraphQL', 'AWS'],
-    link: '#',
+      'Collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games). The company has offices in Paris and Tokyo.',
+    image: '/naruto-ninja-cards.png',
+    technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
+    link: 'https://app.narutoninjacards.com',
   },
   {
     id: 2,
-    title: 'BAM KARAOKE',
+    title: 'BAM Karaoke Box',
     description:
       "As Lead Tech, I developed BAM Karaoke Box's new tech system, focusing on Admin, Booking websites and AWS infrastructure.",
     details:
       'Led migration process from PHP/Symfony monolith and legacy data to the new architecture. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles.',
-    image: 'https://images.pexels.com/photos/3156482/pexels-photo-3156482.jpeg',
+    image: '/bam-karaoke-box.webp',
     technologies: ['NestJS', 'PostgreSQL', 'Redis', 'AWS', 'Terraform', 'GraphQL'],
-    link: '#',
+    link: 'https://booking.bam-karaokebox.com/paris',
   },
   {
     id: 3,
-    title: 'POPCHEF',
+    title: 'Popchef',
     description:
       'Paired with product teams to translate requirements into technical specifications and led DevOps transformation.',
     details:
       'Created DevOps team to migrate AWS infrastructure to Terraform/k8s/helm and automate CI/CD pipelines for the entire stack. Reduced technical debt while developing new scalable products. Reworked the desktop web app, created a cash register React-Native Android app prototype, and stabilized the delivery man mobile app.',
-    image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
+    image: '/popchef.jpg',
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
-    link: '#',
+    link: 'https://www.popchef.com',
   },
 ];
 

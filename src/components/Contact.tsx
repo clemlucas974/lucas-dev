@@ -22,13 +22,13 @@ const contactInfo: ContactInfo[] = [
   {
     icon: <FiMail className='h-6 w-6 text-indigo-400' />,
     title: 'Email',
-    content: 'contact@developer.com',
-    link: 'mailto:contact@developer.com',
+    content: 'clement.lucas.dev@gmail.com',
+    link: 'mailto:clement.lucas.dev@gmail.com',
   },
   {
     icon: <FiMapPin className='h-6 w-6 text-purple-400' />,
     title: 'Location',
-    content: 'Paris, France',
+    content: 'Saint-Paul, La Réunion',
     link: null,
   },
 ];

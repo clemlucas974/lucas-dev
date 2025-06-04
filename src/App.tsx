@@ -11,7 +11,7 @@ import Particles from './components/ui/Particles';
 
 const App: React.FC = () => {
   return (
-    <div className='relative min-h-screen bg-slate-950 text-gray-100 font-inter selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden'>
+    <div className='relative min-h-screen bg-slate-950 text-gray-100 font-electrolize selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden'>
       <Particles className='absolute inset-0 z-0 pointer-events-none' />
       <div className='relative z-10 flex flex-col min-h-screen'>
         <Header />

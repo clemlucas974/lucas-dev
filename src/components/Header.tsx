@@ -49,7 +49,7 @@ const Header: React.FC = () => {
         <div className='flex items-center justify-between'>
           <motion.a
             href='#'
-            className='text-xl sm:text-2xl font-bold text-gradient font-display'
+            className='text-xl sm:text-2xl font-bold text-gradient font-electrolize'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
