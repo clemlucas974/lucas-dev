@@ -28,9 +28,10 @@ const projects: Project[] = [
     id: 2,
     title: 'BAM Karaoke Box',
     description:
-      "As Lead Tech, I developed BAM Karaoke Box's new tech system, focusing on Admin, Booking websites and AWS infrastructure.",
+      'Experience unforgettable singing moments at BAM Karaoke Box in chic and unique places over Europe: Private karaoke rooms, cocktail bars, snack menu, terraces & privatizations.',
+    // "As Lead Tech, I developed BAM Karaoke Box's new tech system, focusing on Admin, Booking websites and AWS infrastructure.",
     details:
-      'Led migration process from PHP/Symfony monolith and legacy data to the new architecture. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles.',
+      'Led migration process from PHP/Symfony monolith and legacy data to the new architecture focusing on Admin/Booking websites and AWS infrastructure. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles.',
     image: '/bam-karaoke-box.webp',
     technologies: ['NestJS', 'PostgreSQL', 'Redis', 'AWS', 'Terraform', 'GraphQL'],
     link: 'https://booking.bam-karaokebox.com/paris',
@@ -45,6 +46,25 @@ const projects: Project[] = [
     image: '/popchef.jpg',
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
     link: 'https://www.popchef.com',
+  },
+  {
+    id: 4,
+    title: 'Quitoque',
+    description: "France's 1st meal kit delivery service",
+    details: `Led a team of 9 developers across web, mobile, and backend. Managed project processes including requirements gathering, specifications, and releases. Architected and led development of new React Native mobile applications. Integrated analytics and marketing tools across platforms.`,
+    image: '/quitoque.jpg',
+    technologies: [
+      'React',
+      'React-Native',
+      'Typescript',
+      'PHP/Symfony',
+      'Firebase',
+      'Fastlane',
+      'GitlabCI',
+      'Kotlin',
+      'Swift',
+    ],
+    link: 'https://quitoque.fr',
   },
 ];
 
