@@ -44,17 +44,7 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Cache Vercel CLI
-        uses: actions/cache@v4
-        id: vercel-cache
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-vercel-cli-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-vercel-cli-
-
       - name: Install Vercel CLI
-        if: steps.vercel-cache.outputs.cache-hit != 'true'
         run: npm install --global vercel@latest
 
       - name: Run linting
