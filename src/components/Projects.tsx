@@ -24,7 +24,7 @@ const projects: Project[] = [
     description: 'The only official Naruto digital collection.',
     details:
       'Develop web-app to collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games).',
-    image: '/naruto-ninja-cards.png',
+    image: '/naruto-ninja-cards.webp',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
     datePublished: '2025',
@@ -49,7 +49,7 @@ const projects: Project[] = [
       'Connected fridge, reinvented cafeteria with salad bar, coffee shop, office delivery.',
     details:
       'Created DevOps team to migrate AWS infrastructure to Terraform/k8s/helm and automate CI/CD pipelines for the entire stack. Reduced technical debt while developing new scalable products. Reworked the desktop web app, created a cash register React-Native Android app prototype, and stabilized the delivery man mobile app.',
-    image: '/popchef.jpg',
+    image: '/popchef.webp',
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
     link: 'https://www.popchef.com',
     datePublished: '2023',
@@ -60,7 +60,7 @@ const projects: Project[] = [
     title: 'Quitoque',
     description: "France's 1st meal kit delivery service",
     details: `Led a team of 9 developers across web, mobile, and backend. Managed project processes including requirements gathering, specifications, and releases. Architected and led development of new React Native mobile applications. Integrated analytics and marketing tools across platforms.`,
-    image: '/quitoque.jpg',
+    image: '/quitoque.webp',
     technologies: [
       'React',
       'React-Native',
@@ -108,7 +108,7 @@ const projects: Project[] = [
       Develop an online swim data visualization dashboard.
       Monitoring of production in China: supervision of CE/FCC certification, travel to manufacturers to validate the first wave of production in Shenzhen (China).
     The device tracks swimming technique in real time and provide audio feedback on their technique.`,
-    image: '/swimbot.jpg',
+    image: '/swimbot.webp',
     technologies: [
       'Android',
       'Java',
