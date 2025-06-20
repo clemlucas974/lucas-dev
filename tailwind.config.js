@@ -50,6 +50,9 @@ export default {
           950: '#042f2e',
         },
       },
+      boxShadow: {
+        header: '0px 2px 3px -1px #ffffff1a, 0px 1px 0px 0px #ffffff05, 0px 0px 0px 1px #ffffff14',
+      },
       animation: {
         'fade-in': 'fade-in 1s ease-in-out forwards',
         'fade-in-up': 'fade-in-up 0.5s ease-out forwards',

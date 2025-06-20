@@ -1,53 +1,108 @@
 import { type FC, useState } from 'react';
 
 import { motion } from 'framer-motion';
+import {
+  SiAmazon,
+  SiCss3,
+  SiDocker,
+  SiFigma,
+  SiGithubactions,
+  SiGo,
+  SiGraphql,
+  SiJira,
+  SiKubernetes,
+  SiMongodb,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiRedis,
+  SiSlack,
+  SiTailwindcss,
+  SiTerraform,
+  SiTypescript,
+} from 'react-icons/si';
 import { useInView } from 'react-intersection-observer';
 
 interface Skill {
   name: string;
   category: 'all' | 'frontend' | 'backend' | 'devops' | 'other';
-  level: number;
+  icon: React.ReactNode;
 }
 
 interface Category {
   id: string;
   label: string;
+  color: string;
+  bgColor: string;
+  borderColor: string;
 }
 
 const categories: Category[] = [
-  { id: 'all', label: 'All' },
-  { id: 'frontend', label: 'Frontend' },
-  { id: 'backend', label: 'Backend' },
-  { id: 'devops', label: 'DevOps' },
-  { id: 'other', label: 'Other' },
+  {
+    id: 'all',
+    label: 'All',
+    color: 'text-white',
+    bgColor: 'bg-gradient-to-r from-indigo-600 to-purple-600',
+    borderColor: 'border-indigo-500',
+  },
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-600',
+    borderColor: 'border-blue-500',
+  },
+  {
+    id: 'backend',
+    label: 'Backend',
+    color: 'text-green-400',
+    bgColor: 'bg-green-600',
+    borderColor: 'border-green-500',
+  },
+  {
+    id: 'devops',
+    label: 'DevOps',
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-600',
+    borderColor: 'border-orange-500',
+  },
+  {
+    id: 'other',
+    label: 'Other',
+    color: 'text-purple-400',
+    bgColor: 'bg-purple-600',
+    borderColor: 'border-purple-500',
+  },
 ];
 
 const skills: Skill[] = [
-  { name: 'React', category: 'frontend', level: 95 },
-  { name: 'TypeScript', category: 'frontend', level: 90 },
-  { name: 'Next.js', category: 'frontend', level: 85 },
-  { name: 'CSS/SCSS', category: 'frontend', level: 90 },
-  { name: 'Tailwind CSS', category: 'frontend', level: 95 },
-  { name: 'React Native', category: 'frontend', level: 80 },
+  { name: 'React', category: 'frontend', icon: <SiReact className='w-5 h-5' /> },
+  { name: 'TypeScript', category: 'frontend', icon: <SiTypescript className='w-5 h-5' /> },
+  { name: 'Next.js', category: 'frontend', icon: <SiNextdotjs className='w-5 h-5' /> },
+  { name: 'CSS/SCSS', category: 'frontend', icon: <SiCss3 className='w-5 h-5' /> },
+  { name: 'Tailwind CSS', category: 'frontend', icon: <SiTailwindcss className='w-5 h-5' /> },
+  { name: 'React Native', category: 'frontend', icon: <SiReact className='w-5 h-5' /> },
 
-  { name: 'Node.js', category: 'backend', level: 90 },
-  { name: 'Go', category: 'backend', level: 75 },
-  { name: 'GraphQL', category: 'backend', level: 85 },
-  { name: 'NestJS', category: 'backend', level: 85 },
-  { name: 'PostgreSQL', category: 'backend', level: 90 },
-  { name: 'Redis', category: 'backend', level: 90 },
-  { name: 'MongoDB', category: 'backend', level: 80 },
+  { name: 'Node.js', category: 'backend', icon: <SiNodedotjs className='w-5 h-5' /> },
+  { name: 'Go', category: 'backend', icon: <SiGo className='w-5 h-5' /> },
+  { name: 'GraphQL', category: 'backend', icon: <SiGraphql className='w-5 h-5' /> },
+  { name: 'NestJS', category: 'backend', icon: <SiNestjs className='w-5 h-5' /> },
+  { name: 'PostgreSQL', category: 'backend', icon: <SiPostgresql className='w-5 h-5' /> },
+  { name: 'Redis', category: 'backend', icon: <SiRedis className='w-5 h-5' /> },
+  { name: 'MongoDB', category: 'backend', icon: <SiMongodb className='w-5 h-5' /> },
 
-  { name: 'AWS', category: 'devops', level: 85 },
-  { name: 'Terraform', category: 'devops', level: 80 },
-  { name: 'Kubernetes', category: 'devops', level: 80 },
-  { name: 'Docker', category: 'devops', level: 90 },
-  { name: 'CI/CD', category: 'devops', level: 90 },
-  { name: 'Github Actions', category: 'devops', level: 85 },
+  { name: 'AWS', category: 'devops', icon: <SiAmazon className='w-5 h-5' /> },
+  { name: 'Terraform', category: 'devops', icon: <SiTerraform className='w-5 h-5' /> },
+  { name: 'Kubernetes', category: 'devops', icon: <SiKubernetes className='w-5 h-5' /> },
+  { name: 'Docker', category: 'devops', icon: <SiDocker className='w-5 h-5' /> },
+  { name: 'CI/CD', category: 'devops', icon: <SiGithubactions className='w-5 h-5' /> },
+  { name: 'Github Actions', category: 'devops', icon: <SiGithubactions className='w-5 h-5' /> },
 
-  { name: 'System Design', category: 'other', level: 90 },
-  { name: 'Team Leadership', category: 'other', level: 85 },
-  { name: 'Agile/Scrum', category: 'other', level: 80 },
+  { name: 'System Design', category: 'other', icon: <SiFigma className='w-5 h-5' /> },
+  { name: 'Team Leadership', category: 'other', icon: <SiSlack className='w-5 h-5' /> },
+  { name: 'Agile/Scrum', category: 'other', icon: <SiJira className='w-5 h-5' /> },
 ];
 
 const containerVariants = {
@@ -61,8 +116,8 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.5 } },
 };
 
 const Skills: FC = () => {
@@ -74,6 +129,11 @@ const Skills: FC = () => {
 
   const filteredSkills =
     activeCategory === 'all' ? skills : skills.filter((skill) => skill.category === activeCategory);
+
+  const getCategoryStyle = (categoryId: string) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category || categories[0]; // fallback to 'all' category
+  };
 
   return (
     <section id='skills' className='section bg-slate-950 relative'>
@@ -102,7 +162,7 @@ const Skills: FC = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeCategory === category.id
-                      ? 'bg-indigo-600 text-white'
+                      ? `${category.bgColor} text-white`
                       : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
                   }`}
                 >
@@ -116,32 +176,35 @@ const Skills: FC = () => {
               variants={containerVariants}
               initial='hidden'
               animate={inView ? 'visible' : 'hidden'}
-              className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+              className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'
             >
-              {filteredSkills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  variants={itemVariants}
-                  className='glass-card p-6 relative overflow-hidden'
-                >
-                  <div
-                    className='absolute bottom-0 left-0 h-1 bg-indigo-600'
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
-                  <h3 className='text-lg font-medium mb-2'>{skill.name}</h3>
-                  <div className='flex items-center justify-between'>
-                    <div className='w-full bg-slate-800 rounded-full h-2.5'>
-                      <motion.div
-                        className='h-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600'
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: 0.2 + index * 0.05 }}
-                      />
+              {filteredSkills.map((skill) => {
+                const categoryStyle = getCategoryStyle(skill.category);
+                return (
+                  <motion.div
+                    key={skill.name}
+                    variants={itemVariants}
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.2 },
+                    }}
+                    className={`glass-card p-4 relative overflow-hidden group cursor-pointer border ${categoryStyle.borderColor} hover:border-opacity-100 transition-all duration-300`}
+                  >
+                    <div className='flex flex-col items-center text-center space-y-3'>
+                      <div
+                        className={`p-3 rounded-lg ${categoryStyle.bgColor} bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300`}
+                      >
+                        <div className={categoryStyle.color}>{skill.icon}</div>
+                      </div>
+                      <h3
+                        className={`text-sm font-medium ${categoryStyle.color} group-hover:text-white transition-colors duration-300`}
+                      >
+                        {skill.name}
+                      </h3>
                     </div>
-                    <span className='ml-4 text-sm font-medium text-gray-400'>{skill.level}%</span>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         </div>
