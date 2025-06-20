@@ -183,7 +183,6 @@ const Projects: FC = () => {
               }}
               onClick={() => setActiveProject(project)}
               className='glass-card group overflow-hidden cursor-pointer relative'
-              role='listitem'
               itemScope
               itemType='https://schema.org/CreativeWork'
             >
