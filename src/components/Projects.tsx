@@ -19,7 +19,7 @@ const projects: Project[] = [
     title: 'Naruto Ninja Cards',
     description: 'The only official Naruto digital collection.',
     details:
-      'Collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games). The company has offices in Paris and Tokyo.',
+      'Develop web-app to collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games).',
     image: '/naruto-ninja-cards.png',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
@@ -27,9 +27,7 @@ const projects: Project[] = [
   {
     id: 2,
     title: 'BAM Karaoke Box',
-    description:
-      'Experience unforgettable singing moments at BAM Karaoke Box in chic and unique places over Europe: Private karaoke rooms, cocktail bars, snack menu, terraces & privatizations.',
-    // "As Lead Tech, I developed BAM Karaoke Box's new tech system, focusing on Admin, Booking websites and AWS infrastructure.",
+    description: 'Private karaoke rooms, cocktail bars, snack menu, terraces & privatizations.',
     details:
       'Led migration process from PHP/Symfony monolith and legacy data to the new architecture focusing on Admin/Booking websites and AWS infrastructure. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles.',
     image: '/bam-karaoke-box.webp',
@@ -40,7 +38,7 @@ const projects: Project[] = [
     id: 3,
     title: 'Popchef',
     description:
-      'Paired with product teams to translate requirements into technical specifications and led DevOps transformation.',
+      'Connected fridge, reinvented cafeteria with salad bar, coffee shop, office delivery.',
     details:
       'Created DevOps team to migrate AWS infrastructure to Terraform/k8s/helm and automate CI/CD pipelines for the entire stack. Reduced technical debt while developing new scalable products. Reworked the desktop web app, created a cash register React-Native Android app prototype, and stabilized the delivery man mobile app.',
     image: '/popchef.jpg',
@@ -58,13 +56,55 @@ const projects: Project[] = [
       'React-Native',
       'Typescript',
       'PHP/Symfony',
+      'MySQL',
       'Firebase',
       'Fastlane',
       'GitlabCI',
       'Kotlin',
       'Swift',
+      'Management',
+      'Team leadership',
     ],
     link: 'https://quitoque.fr',
+  },
+  {
+    id: 5,
+    title: 'Fastory',
+    description: 'Platform for creating and sharing mobile contests.',
+    details: `Lead developer on Instagram Stories web Widget: Instagram Stories crawling NodeJS cron, AWS Lambda & API Gateway to monitor each widget's liveness. Work on: custom analytics system via GoogleCloud (Pub/Sub, Dataflow, BigQuery) to follow hundreds of thousand visits, screencast of Fastory web stories to export them as videos/images (Headless Chrome V1 to Docker/Electron/xvfb), media loader with several providers, Business Manager Facebook and Snapchat Business interconnections, optimization of our multi platform web video player (HLS, responsiveness, etc), GDPR, instant winning and draw lots features, webpack 2 to webpack 4 migration.`,
+    image: '/fastory.webp',
+    technologies: [
+      'React',
+      'NodeJS',
+      'AWS (S3, Lambda)',
+      'CircleCI',
+      'Docker',
+      'Electron',
+      'PostgreSQL',
+    ],
+    link: 'https://fastory.io',
+  },
+  {
+    id: 6,
+    title: 'Swimbot',
+    description: 'Smart device correcting your swimming technique in the water and in real time.',
+    details: `
+      Software Engineer on the Swimbot Android embedded software (Java, Android).
+      Research and testing of swimming analysis algorithms (Python, Java) on professional swimmers.
+      Develop an online swim data visualization dashboard.
+      Monitoring of production in China: supervision of CE/FCC certification, travel to manufacturers to validate the first wave of production in Shenzhen (China).
+    The device tracks swimming technique in real time and provide audio feedback on their technique.`,
+    image: '/swimbot.jpg',
+    technologies: [
+      'Android',
+      'Java',
+      'Python',
+      'React',
+      'MongoDB',
+      'Embedded Systems',
+      'Data visualization',
+    ],
+    link: 'https://www.youtube.com/@SwimBot',
   },
 ];
 
@@ -123,7 +163,8 @@ const Projects: FC = () => {
                 y: -10,
                 transition: { duration: 0.3 },
               }}
-              className='glass-card group overflow-hidden'
+              onClick={() => setActiveProject(project)}
+              className='glass-card group overflow-hidden cursor-pointer'
             >
               <div className='h-48 overflow-hidden'>
                 <img
@@ -148,7 +189,7 @@ const Projects: FC = () => {
                   )}
                 </div>
                 <button
-                  onClick={() => setActiveProject(project)}
+                  // onClick={() => setActiveProject(project)}
                   className='text-indigo-400 text-sm font-medium hover:text-indigo-300 transition-colors'
                 >
                   View Details →
