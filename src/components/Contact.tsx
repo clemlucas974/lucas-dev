@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import type { FC } from 'react';
 
 import { type Variants, motion } from 'framer-motion';
 import { FiMail, FiMapPin } from 'react-icons/fi';
@@ -43,7 +43,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const Contact: React.FC = () => {
+const Contact: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
