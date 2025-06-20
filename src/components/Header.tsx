@@ -187,7 +187,7 @@ const Header: React.FC = () => {
             <h2 id='mobile-menu-title' className='sr-only'>
               Navigation Menu
             </h2>
-            <ul className='space-y-4' role='menubar'>
+            <ul className='space-y-4'>
               {navLinks.map((link) => (
                 <motion.li
                   key={link.name}
@@ -199,13 +199,11 @@ const Header: React.FC = () => {
                   initial='initial'
                   animate='animate'
                   transition={prefersReducedMotion ? {} : { duration: 0.3 }}
-                  role='none'
                 >
                   <a
                     href={link.href}
                     className='block text-base font-medium text-gray-200 hover:text-indigo-400 transition-colors duration-300'
                     onClick={() => setMobileMenuOpen(false)}
-                    role='menuitem'
                     tabIndex={mobileMenuOpen ? 0 : -1}
                   >
                     {link.name}
@@ -221,13 +219,8 @@ const Header: React.FC = () => {
                 initial='initial'
                 animate='animate'
                 transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.1 }}
-                role='none'
               >
-                <button
-                  className='mt-2 w-full button-primary'
-                  role='menuitem'
-                  tabIndex={mobileMenuOpen ? 0 : -1}
-                >
+                <button className='mt-2 w-full button-primary' tabIndex={mobileMenuOpen ? 0 : -1}>
                   Resume
                 </button>
               </motion.li>

@@ -128,7 +128,6 @@ const Hero: FC = () => {
               animate='animate'
               transition={prefersReducedMotion ? {} : { delay: 0.6, duration: 0.8 }}
               className='mt-6 sm:mt-8 flex items-center space-x-4 sm:space-x-5 justify-center lg:justify-start'
-              role='navigation'
               aria-label='Social media links'
             >
               <a

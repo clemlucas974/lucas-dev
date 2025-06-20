@@ -205,7 +205,6 @@ const Projects: FC = () => {
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
           className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-          role='list'
           aria-label='Portfolio projects'
         >
           {projects.map((project) => (
@@ -309,7 +308,6 @@ const Projects: FC = () => {
               animate='animate'
               exit='exit'
               className='bg-slate-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto'
-              role='document'
             >
               <div className='h-56 md:h-72 overflow-hidden'>
                 <img
@@ -332,9 +330,9 @@ const Projects: FC = () => {
                   <h4 className='text-sm uppercase text-gray-500 mb-3 tracking-wider font-medium'>
                     Technologies
                   </h4>
-                  <div className='flex flex-wrap gap-2' role='list' aria-label='Technologies used'>
+                  <div className='flex flex-wrap gap-2' aria-label='Technologies used'>
                     {activeProject.technologies.map((tech) => (
-                      <span key={tech} className='tech-pill' role='listitem'>
+                      <span key={tech} className='tech-pill'>
                         {tech}
                       </span>
                     ))}

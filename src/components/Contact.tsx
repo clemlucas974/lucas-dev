@@ -117,18 +117,13 @@ const Contact: FC = () => {
                 <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-3 sm:mb-4'>
                   Follow Me
                 </h3>
-                <div
-                  className='flex space-x-3 sm:space-x-4'
-                  role='list'
-                  aria-label='Social media links'
-                >
+                <div className='flex space-x-3 sm:space-x-4' aria-label='Social media links'>
                   <a
                     href={GITHUB_PROFILE_URL}
                     aria-label='Visit my GitHub profile (opens in new tab)'
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                     target='_blank'
                     rel='noopener noreferrer'
-                    role='listitem'
                   >
                     <svg
                       className='h-4 w-4 sm:h-5 sm:w-5'
@@ -149,7 +144,6 @@ const Contact: FC = () => {
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                     target='_blank'
                     rel='noopener noreferrer'
-                    role='listitem'
                   >
                     <svg
                       className='h-4 w-4 sm:h-5 sm:w-5'

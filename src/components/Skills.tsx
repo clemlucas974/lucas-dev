@@ -211,7 +211,6 @@ const Skills: FC = () => {
                     }
                     className={`glass-card p-4 relative overflow-hidden group cursor-pointer border ${categoryStyle.borderColor} hover:border-opacity-100 transition-all duration-300`}
                     tabIndex={0}
-                    role='listitem'
                     aria-label={`${skill.name} skill`}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
