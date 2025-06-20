@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -25,17 +29,39 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: node-cache
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm ci
+
+      - name: Cache Vercel CLI
+        uses: actions/cache@v4
+        id: vercel-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-vercel-cli-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vercel-cli-
+
+      - name: Install Vercel CLI
+        if: steps.vercel-cache.outputs.cache-hit != 'true'
+        run: npm install --global vercel@latest
 
       - name: Run linting
         run: npm run lint
 
       - name: Run type checking
         run: npm run build
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
 
       - name: Deploy to Vercel
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
