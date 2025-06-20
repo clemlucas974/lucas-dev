@@ -15,9 +15,9 @@ const Hero: FC = () => {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
           <motion.article
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             className='text-center lg:text-left'
             role='main'
           >
@@ -33,10 +33,11 @@ const Hero: FC = () => {
             </motion.div>
             <motion.h1
               id='hero-heading'
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
+              transition={{ duration: 0.3 }}
               className=' sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 font-electrolize text-base/5'
+              style={{ willChange: 'auto' }}
             >
               Building
               <span className='title-gradient'> exceptional </span>
