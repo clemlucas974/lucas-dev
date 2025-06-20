@@ -11,6 +11,8 @@ interface Project {
   image: string;
   technologies: string[];
   link: string;
+  datePublished?: string;
+  client?: string;
 }
 
 const projects: Project[] = [
@@ -23,6 +25,8 @@ const projects: Project[] = [
     image: '/naruto-ninja-cards.png',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
+    datePublished: '2025',
+    client: 'Sekai',
   },
   {
     id: 2,
@@ -33,6 +37,8 @@ const projects: Project[] = [
     image: '/bam-karaoke-box.webp',
     technologies: ['NestJS', 'PostgreSQL', 'Redis', 'AWS', 'Terraform', 'GraphQL'],
     link: 'https://booking.bam-karaokebox.com/paris',
+    datePublished: '2024',
+    client: 'BAM Karaoke Box',
   },
   {
     id: 3,
@@ -44,6 +50,8 @@ const projects: Project[] = [
     image: '/popchef.jpg',
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
     link: 'https://www.popchef.com',
+    datePublished: '2023',
+    client: 'Popchef',
   },
   {
     id: 4,
@@ -66,6 +74,8 @@ const projects: Project[] = [
       'Team leadership',
     ],
     link: 'https://quitoque.fr',
+    datePublished: '2022',
+    client: 'Quitoque',
   },
   {
     id: 5,
@@ -83,6 +93,8 @@ const projects: Project[] = [
       'PostgreSQL',
     ],
     link: 'https://fastory.io',
+    datePublished: '2019',
+    client: 'Fastory',
   },
   {
     id: 6,
@@ -105,6 +117,8 @@ const projects: Project[] = [
       'Data visualization',
     ],
     link: 'https://www.youtube.com/@SwimBot',
+    datePublished: '2016',
+    client: 'Swimbot',
   },
 ];
 
@@ -154,9 +168,11 @@ const Projects: FC = () => {
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
           className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+          role='list'
+          aria-label='Portfolio projects'
         >
           {projects.map((project) => (
-            <motion.div
+            <motion.article
               key={project.id}
               variants={itemVariants}
               whileHover={{
@@ -165,12 +181,23 @@ const Projects: FC = () => {
               }}
               onClick={() => setActiveProject(project)}
               className='glass-card group overflow-hidden cursor-pointer relative'
+              role='listitem'
+              itemScope
+              itemType='https://schema.org/CreativeWork'
             >
+              <meta itemProp='name' content={project.title} />
+              <meta itemProp='description' content={project.description} />
+              {project.datePublished && (
+                <meta itemProp='datePublished' content={project.datePublished} />
+              )}
+              {project.client && <meta itemProp='creator' content={project.client} />}
+
               <div className='h-48 overflow-hidden'>
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} - ${project.description}`}
                   className='w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110'
+                  itemProp='image'
                 />
               </div>
               <div className='p-6'>
@@ -198,6 +225,7 @@ const Projects: FC = () => {
                     stroke='currentColor'
                     viewBox='0 0 24 24'
                     xmlns='http://www.w3.org/2000/svg'
+                    aria-hidden='true'
                   >
                     <path
                       strokeLinecap='round'
@@ -215,12 +243,17 @@ const Projects: FC = () => {
                   <p className='text-sm font-medium'>View Details</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
 
         {activeProject && (
-          <div className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm'>
+          <div
+            className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm'
+            role='dialog'
+            aria-modal='true'
+            aria-labelledby='project-modal-title'
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -230,12 +263,15 @@ const Projects: FC = () => {
               <div className='h-56 md:h-72 overflow-hidden'>
                 <img
                   src={activeProject.image}
-                  alt={activeProject.title}
+                  alt={`${activeProject.title} project screenshot`}
                   className='w-full h-full object-cover object-center'
                 />
               </div>
               <div className='p-6 md:p-8'>
-                <h3 className='text-2xl font-electrolize font-bold mb-4 text-white'>
+                <h3
+                  id='project-modal-title'
+                  className='text-2xl font-electrolize font-bold mb-4 text-white'
+                >
                   {activeProject.title}
                 </h3>
                 <p className='text-gray-300 mb-6'>{activeProject.details}</p>
@@ -252,10 +288,20 @@ const Projects: FC = () => {
                   </div>
                 </div>
                 <div className='flex justify-end space-x-4'>
-                  <button onClick={() => setActiveProject(null)} className='button-outline'>
+                  <button
+                    onClick={() => setActiveProject(null)}
+                    className='button-outline'
+                    aria-label='Close project details'
+                  >
                     Close
                   </button>
-                  <a href={activeProject.link} className='button-primary'>
+                  <a
+                    href={activeProject.link}
+                    className='button-primary'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label={`Visit ${activeProject.title} project`}
+                  >
                     Visit Project
                   </a>
                 </div>

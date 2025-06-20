@@ -6,16 +6,18 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
+import SEO from './components/SEO';
 import Skills from './components/Skills';
 import Particles from './components/ui/Particles';
 
 const App: React.FC = () => {
   return (
     <div className='relative min-h-screen bg-slate-950 text-gray-100 font-electrolize selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden'>
+      <SEO />
       <Particles className='absolute inset-0 z-0 pointer-events-none' />
       <div className='relative z-10 flex flex-col min-h-screen'>
         <Header />
-        <main className='flex-grow'>
+        <main className='flex-grow' role='main' aria-label='Portfolio content'>
           <Hero />
           <About />
           <Skills />

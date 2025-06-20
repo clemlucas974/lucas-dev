@@ -1,0 +1,21 @@
+{
+  "name": "LUCAS.DEV - Senior Fullstack Engineer",
+  "short_name": "LUCAS.DEV",
+  "description": "Senior Fullstack Engineer with 10+ years experience specializing in React, TypeScript, Node.js, GraphQL, PostgreSQL, and AWS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "technology"],
+  "lang": "en",
+  "dir": "ltr"
+}
