@@ -159,7 +159,7 @@ const Footer: FC = () => {
         </div>
 
         <div className='pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-slate-800/50 text-center md:flex md:items-center md:justify-between'>
-          <div className='text-xs sm:text-sm text-gray-500'>
+          <div className='text-xs sm:text-sm text-gray-300'>
             © {currentYear} Senior Fullstack Developer. All rights reserved.
           </div>
         </div>
