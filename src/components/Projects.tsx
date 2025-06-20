@@ -173,6 +173,8 @@ const Projects: FC = () => {
         >
           {projects.map((project) => (
             <motion.article
+              aria-label={`View details of ${project.title}`}
+              aria-describedby={`${project.title} description`}
               key={project.id}
               variants={itemVariants}
               whileHover={{

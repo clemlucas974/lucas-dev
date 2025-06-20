@@ -111,6 +111,7 @@ const Contact: FC = () => {
                 <div className='flex space-x-3 sm:space-x-4'>
                   <a
                     href={GITHUB_PROFILE_URL}
+                    aria-label='Visit my GitHub profile'
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
@@ -128,6 +129,7 @@ const Contact: FC = () => {
                   </a>
                   <a
                     href={LINKEDIN_PROFILE_URL}
+                    aria-label='Visit my LinkedIn profile'
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
                   >
                     <svg
