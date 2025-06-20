@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
+import { useReducedMotion } from '../../utils/useReducedMotion';
+
 interface Particle {
   x: number;
   y: number;
@@ -16,6 +18,7 @@ interface ParticlesProps {
 
 const Particles: React.FC<ParticlesProps> = ({ className = '' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,8 +45,8 @@ const Particles: React.FC<ParticlesProps> = ({ className = '' }) => {
           y: Math.random() * canvas.height,
           radius: Math.random() * 1.5 + 0.5,
           color: `rgba(${Math.floor(Math.random() * 50 + 100)}, ${Math.floor(Math.random() * 50 + 100)}, ${Math.floor(Math.random() * 255)}, ${Math.random() * 0.5 + 0.1})`,
-          speedX: Math.random() * 0.5 - 0.25,
-          speedY: Math.random() * 0.5 - 0.25,
+          speedX: prefersReducedMotion ? 0 : Math.random() * 0.5 - 0.25,
+          speedY: prefersReducedMotion ? 0 : Math.random() * 0.5 - 0.25,
           opacity: Math.random() * 0.5 + 0.2,
         });
       }
@@ -53,15 +56,17 @@ const Particles: React.FC<ParticlesProps> = ({ className = '' }) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Move particles
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
+        // Move particles only if reduced motion is not preferred
+        if (!prefersReducedMotion) {
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
 
-        // Wrap particles around canvas
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+          // Wrap particles around canvas
+          if (particle.x < 0) particle.x = canvas.width;
+          if (particle.x > canvas.width) particle.x = 0;
+          if (particle.y < 0) particle.y = canvas.height;
+          if (particle.y > canvas.height) particle.y = 0;
+        }
 
         // Draw particle
         ctx.beginPath();
@@ -75,7 +80,10 @@ const Particles: React.FC<ParticlesProps> = ({ className = '' }) => {
       // Connect particles with lines
       connectParticles();
 
-      animationFrameId = requestAnimationFrame(drawParticles);
+      // Only animate if reduced motion is not preferred
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(drawParticles);
+      }
     };
 
     const connectParticles = () => {
@@ -101,18 +109,34 @@ const Particles: React.FC<ParticlesProps> = ({ className = '' }) => {
 
     resizeCanvas();
     createParticles();
-    drawParticles();
+
+    // Draw once for reduced motion, or start animation loop for normal motion
+    if (prefersReducedMotion) {
+      drawParticles();
+    } else {
+      drawParticles();
+    }
 
     window.addEventListener('resize', () => {
       resizeCanvas();
       createParticles();
+      if (prefersReducedMotion) {
+        drawParticles();
+      }
     });
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [prefersReducedMotion]);
+
+  // Don't render particles at all if reduced motion is preferred
+  if (prefersReducedMotion) {
+    return null;
+  }
 
   return <canvas ref={canvasRef} className={`fixed inset-0 -z-10 ${className}`} />;
 };

@@ -25,6 +25,8 @@ import {
 } from 'react-icons/si';
 import { useInView } from 'react-intersection-observer';
 
+import { useReducedMotion } from '../utils/useReducedMotion';
+
 interface Skill {
   name: string;
   category: 'all' | 'frontend' | 'backend' | 'devops' | 'other';
@@ -105,27 +107,13 @@ const skills: Skill[] = [
   { name: 'Agile/Scrum', category: 'other', icon: <SiJira className='w-5 h-5' /> },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.5 } },
-};
-
 const Skills: FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
+  const prefersReducedMotion = useReducedMotion();
 
   const filteredSkills =
     activeCategory === 'all' ? skills : skills.filter((skill) => skill.category === activeCategory);
@@ -135,14 +123,33 @@ const Skills: FC = () => {
     return category || categories[0]; // fallback to 'all' category
   };
 
+  const containerVariants = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0 },
+    visible: { opacity: 1, transition: { duration: prefersReducedMotion ? 0 : 0.5 } },
+  };
+
   return (
     <section id='skills' className='section bg-slate-950 relative'>
       <div className='container'>
         <div className='max-w-5xl mx-auto'>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+            animate={
+              inView
+                ? { opacity: 1, y: 0 }
+                : { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }
+            }
+            transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
             className='text-center mb-12'
           >
             <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
@@ -155,7 +162,11 @@ const Skills: FC = () => {
           </motion.div>
 
           <div className='mb-10'>
-            <div className='flex flex-wrap justify-center gap-3 mb-10'>
+            <div
+              className='flex flex-wrap justify-center gap-3 mb-10'
+              role='tablist'
+              aria-label='Filter skills by category'
+            >
               {categories.map((category) => (
                 <button
                   key={category.id}
@@ -165,6 +176,9 @@ const Skills: FC = () => {
                       ? `${category.bgColor} text-white`
                       : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
                   }`}
+                  role='tab'
+                  aria-selected={activeCategory === category.id}
+                  aria-controls={`skills-panel-${category.id}`}
                 >
                   {category.label}
                 </button>
@@ -177,6 +191,9 @@ const Skills: FC = () => {
               initial='hidden'
               animate={inView ? 'visible' : 'hidden'}
               className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'
+              role='tabpanel'
+              id={`skills-panel-${activeCategory}`}
+              aria-label={`${activeCategory === 'all' ? 'All' : activeCategory} skills`}
             >
               {filteredSkills.map((skill) => {
                 const categoryStyle = getCategoryStyle(skill.category);
@@ -184,15 +201,29 @@ const Skills: FC = () => {
                   <motion.div
                     key={skill.name}
                     variants={itemVariants}
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.2 },
-                    }}
+                    whileHover={
+                      prefersReducedMotion
+                        ? {}
+                        : {
+                            scale: 1.05,
+                            transition: { duration: 0.2 },
+                          }
+                    }
                     className={`glass-card p-4 relative overflow-hidden group cursor-pointer border ${categoryStyle.borderColor} hover:border-opacity-100 transition-all duration-300`}
+                    tabIndex={0}
+                    role='listitem'
+                    aria-label={`${skill.name} skill`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        // Could add interaction here if needed
+                      }
+                    }}
                   >
                     <div className='flex flex-col items-center text-center space-y-3'>
                       <div
                         className={`p-3 rounded-lg ${categoryStyle.bgColor} bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300`}
+                        aria-hidden='true'
                       >
                         <div className={categoryStyle.color}>{skill.icon}</div>
                       </div>

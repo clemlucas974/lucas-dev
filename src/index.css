@@ -7,6 +7,40 @@
     @apply bg-slate-950 text-gray-100 font-sans antialiased;
   }
 
+  /* Improved focus styles for better accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-950;
+  }
+
+  /* Skip to main content link */
+  .skip-link {
+    @apply absolute -top-10 left-6 bg-indigo-600 text-white px-4 py-2 rounded-md z-50 transition-transform duration-200;
+  }
+
+  .skip-link:focus {
+    @apply top-6 transform-none;
+  }
+
+  /* Prefers reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    .skip-link {
+      transition: none;
+    }
+  }
+
   ::-webkit-scrollbar {
     @apply w-2;
   }
@@ -30,6 +64,19 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 
 @layer components {
@@ -42,15 +89,15 @@
   }
 
   .button-primary {
-    @apply button bg-indigo-600 text-white hover:bg-indigo-700;
+    @apply button bg-indigo-600 text-white hover:bg-indigo-700 focus:bg-indigo-700;
   }
 
   .button-secondary {
-    @apply button bg-purple-600 text-white hover:bg-purple-700;
+    @apply button bg-purple-600 text-white hover:bg-purple-700 focus:bg-purple-700;
   }
 
   .button-outline {
-    @apply button border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white;
+    @apply button border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white focus:bg-indigo-500 focus:text-white;
   }
 
   .glass-card {
@@ -70,7 +117,28 @@
   }
 
   .tech-pill {
-    @apply px-3 py-1 rounded-full text-xs font-medium bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 transition-colors;
+    @apply px-3 py-1 rounded-full text-xs font-medium bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 transition-colors focus:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900;
+  }
+
+  /* Improved link styles for better contrast */
+  a:not(.button):not(.button-primary):not(.button-secondary):not(.button-outline) {
+    @apply text-indigo-400 hover:text-indigo-300 focus:text-indigo-300 transition-colors;
+  }
+
+  /* Reduced motion styles */
+  @media (prefers-reduced-motion: reduce) {
+    .button,
+    .button-primary,
+    .button-secondary,
+    .button-outline,
+    .tech-pill,
+    a:not(.button):not(.button-primary):not(.button-secondary):not(.button-outline) {
+      transition: none;
+    }
+
+    .glass-card {
+      backdrop-filter: none;
+    }
   }
 }
 
@@ -95,4 +163,11 @@
 
 .glow {
   box-shadow: 0 0 80px 20px rgba(129, 140, 248, 0.15);
+}
+
+/* Reduced motion for glow effects */
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    box-shadow: 0 0 40px 10px rgba(129, 140, 248, 0.1);
+  }
 }

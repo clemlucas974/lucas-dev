@@ -5,8 +5,37 @@ import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
+import { useReducedMotion } from '../utils/useReducedMotion';
 
 const Hero: FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Reduced motion variants
+  const reducedMotionVariants = {
+    initial: { opacity: 1 },
+    animate: { opacity: 1 },
+  };
+
+  const normalMotionVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+  };
+
+  const titleVariants = prefersReducedMotion ? reducedMotionVariants : normalMotionVariants;
+  const badgeVariants = prefersReducedMotion
+    ? reducedMotionVariants
+    : { initial: { opacity: 0 }, animate: { opacity: 1 } };
+  const descriptionVariants = prefersReducedMotion
+    ? reducedMotionVariants
+    : { initial: { opacity: 0 }, animate: { opacity: 1 } };
+  const navVariants = prefersReducedMotion ? reducedMotionVariants : normalMotionVariants;
+  const socialVariants = prefersReducedMotion
+    ? reducedMotionVariants
+    : { initial: { opacity: 0 }, animate: { opacity: 1 } };
+  const visualVariants = prefersReducedMotion
+    ? reducedMotionVariants
+    : { initial: { opacity: 0, scale: 0.9 }, animate: { opacity: 1, scale: 1 } };
+
   return (
     <section
       className='relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden hero-gradient'
@@ -15,16 +44,18 @@ const Hero: FC = () => {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
           <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={titleVariants}
+            initial='initial'
+            animate='animate'
+            transition={prefersReducedMotion ? {} : { duration: 0.8 }}
             className='text-center lg:text-left'
             role='main'
           >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              variants={badgeVariants}
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { delay: 0.2, duration: 0.8 }}
               className='mb-4 inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-indigo-500/10 text-indigo-400 rounded-full text-xs sm:text-sm font-medium'
               role='text'
               aria-label='Professional title'
@@ -33,9 +64,10 @@ const Hero: FC = () => {
             </motion.div>
             <motion.h1
               id='hero-heading'
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
+              variants={titleVariants}
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { delay: 0.3, duration: 0.8 }}
               className=' sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 font-electrolize text-base/5'
             >
               Building
@@ -43,9 +75,10 @@ const Hero: FC = () => {
               digital experiences
             </motion.h1>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
+              variants={descriptionVariants}
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { delay: 0.4, duration: 0.8 }}
               className='text-lg sm:text-xl md:text-2xl text-gray-400 mb-6 sm:mb-8'
               aria-live='polite'
               aria-label='Technologies I work with'
@@ -62,12 +95,15 @@ const Hero: FC = () => {
                 repeat={Infinity}
                 cursor={true}
                 className='inline-block'
+                aria-label='Technologies I specialize in'
+                speed={prefersReducedMotion ? 50 : 40}
               />
             </motion.div>
             <motion.nav
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              variants={navVariants}
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { delay: 0.5, duration: 0.8 }}
               className='flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start'
               aria-label='Main navigation'
             >
@@ -87,9 +123,10 @@ const Hero: FC = () => {
               </a>
             </motion.nav>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
+              variants={socialVariants}
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { delay: 0.6, duration: 0.8 }}
               className='mt-6 sm:mt-8 flex items-center space-x-4 sm:space-x-5 justify-center lg:justify-start'
               role='navigation'
               aria-label='Social media links'
@@ -98,26 +135,27 @@ const Hero: FC = () => {
                 href={GITHUB_PROFILE_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-400 hover:text-white transition-colors'
-                aria-label='Visit my GitHub profile'
+                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-slate-800'
+                aria-label='Visit my GitHub profile (opens in new tab)'
               >
-                <FiGithub className='h-5 w-5 sm:h-6 sm:w-6' />
+                <FiGithub className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
               </a>
               <a
                 href={LINKEDIN_PROFILE_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-400 hover:text-white transition-colors'
-                aria-label='Visit my LinkedIn profile'
+                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-slate-800'
+                aria-label='Visit my LinkedIn profile (opens in new tab)'
               >
-                <FiLinkedin className='h-5 w-5 sm:h-6 sm:w-6' />
+                <FiLinkedin className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
               </a>
             </motion.div>
           </motion.article>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            variants={visualVariants}
+            initial='initial'
+            animate='animate'
+            transition={prefersReducedMotion ? {} : { delay: 0.3, duration: 0.8 }}
             className='relative flex justify-center lg:justify-end mt-8 lg:mt-0'
             aria-hidden='true'
           >

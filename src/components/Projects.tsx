@@ -1,7 +1,9 @@
-import { type FC, useState } from 'react';
+import { type FC, useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+
+import { useReducedMotion } from '../utils/useReducedMotion';
 
 interface Project {
   id: number;
@@ -124,33 +126,68 @@ const projects: Project[] = [
 
 const Projects: FC = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
+  const prefersReducedMotion = useReducedMotion();
+
+  // Handle escape key and focus management for modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && activeProject) {
+        setActiveProject(null);
+      }
+    };
+
+    if (activeProject) {
+      document.addEventListener('keydown', handleEscape);
+      // Focus close button when modal opens
+      closeButtonRef.current?.focus();
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeProject]);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: prefersReducedMotion ? 0 : 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0 : 0.6 } },
+  };
+
+  const modalVariants = {
+    initial: { opacity: prefersReducedMotion ? 1 : 0, scale: prefersReducedMotion ? 1 : 0.9 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: prefersReducedMotion ? 0 : 0, scale: prefersReducedMotion ? 1 : 0.9 },
   };
 
   return (
     <section id='projects' className='section bg-gradient-radial from-slate-950 to-black relative'>
       <div className='container'>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+          animate={
+            inView
+              ? { opacity: 1, y: 0 }
+              : { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }
+          }
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
           className='text-center mb-16'
         >
           <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
@@ -177,10 +214,14 @@ const Projects: FC = () => {
               aria-describedby={`${project.title} description`}
               key={project.id}
               variants={itemVariants}
-              whileHover={{
-                y: -10,
-                transition: { duration: 0.3 },
-              }}
+              whileHover={
+                prefersReducedMotion
+                  ? {}
+                  : {
+                      y: -10,
+                      transition: { duration: 0.3 },
+                    }
+              }
               onClick={() => setActiveProject(project)}
               className='glass-card group overflow-hidden cursor-pointer relative'
               itemScope
@@ -254,12 +295,21 @@ const Projects: FC = () => {
             role='dialog'
             aria-modal='true'
             aria-labelledby='project-modal-title'
+            aria-describedby='project-modal-description'
+            ref={modalRef}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setActiveProject(null);
+              }
+            }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              variants={modalVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
               className='bg-slate-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto'
+              role='document'
             >
               <div className='h-56 md:h-72 overflow-hidden'>
                 <img
@@ -275,14 +325,16 @@ const Projects: FC = () => {
                 >
                   {activeProject.title}
                 </h3>
-                <p className='text-gray-300 mb-6'>{activeProject.details}</p>
+                <p id='project-modal-description' className='text-gray-300 mb-6'>
+                  {activeProject.details}
+                </p>
                 <div className='mb-6'>
                   <h4 className='text-sm uppercase text-gray-500 mb-3 tracking-wider font-medium'>
                     Technologies
                   </h4>
-                  <div className='flex flex-wrap gap-2'>
+                  <div className='flex flex-wrap gap-2' role='list' aria-label='Technologies used'>
                     {activeProject.technologies.map((tech) => (
-                      <span key={tech} className='tech-pill'>
+                      <span key={tech} className='tech-pill' role='listitem'>
                         {tech}
                       </span>
                     ))}
@@ -290,6 +342,7 @@ const Projects: FC = () => {
                 </div>
                 <div className='flex justify-end space-x-4'>
                   <button
+                    ref={closeButtonRef}
                     onClick={() => setActiveProject(null)}
                     className='button-outline'
                     aria-label='Close project details'
@@ -301,7 +354,7 @@ const Projects: FC = () => {
                     className='button-primary'
                     target='_blank'
                     rel='noopener noreferrer'
-                    aria-label={`Visit ${activeProject.title} project`}
+                    aria-label={`Visit ${activeProject.title} project (opens in new tab)`}
                   >
                     Visit Project
                   </a>

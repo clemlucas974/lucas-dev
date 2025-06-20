@@ -15,9 +15,15 @@ const App: React.FC = () => {
     <div className='relative min-h-screen bg-slate-950 text-gray-100 font-electrolize selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden'>
       <SEO />
       <Particles className='absolute inset-0 z-0 pointer-events-none' />
+
+      {/* Skip to main content link for accessibility */}
+      <a href='#main-content' className='skip-link'>
+        Skip to main content
+      </a>
+
       <div className='relative z-10 flex flex-col min-h-screen'>
         <Header />
-        <main className='flex-grow' role='main' aria-label='Portfolio content'>
+        <main id='main-content' className='flex-grow' role='main' aria-label='Portfolio content'>
           <Hero />
           <About />
           <Skills />

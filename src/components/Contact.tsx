@@ -5,6 +5,7 @@ import { FiMail, FiMapPin } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
+import { useReducedMotion } from '../utils/useReducedMotion';
 
 interface ContactInfo {
   icon: JSX.Element;
@@ -28,26 +29,27 @@ const contactInfo: ContactInfo[] = [
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
 const Contact: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
+  const prefersReducedMotion = useReducedMotion();
+
+  const containerVariants: Variants = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0 : 0.6 } },
+  };
 
   return (
     <section
@@ -56,9 +58,13 @@ const Contact: FC = () => {
     >
       <div className='container px-4 sm:px-6 lg:px-8'>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+          animate={
+            inView
+              ? { opacity: 1, y: 0 }
+              : { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }
+          }
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
           className='text-center mb-12 sm:mb-16'
         >
           <h2 className='font-electrolize text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4'>
@@ -86,13 +92,16 @@ const Contact: FC = () => {
               <div className='space-y-4 sm:space-y-6'>
                 {contactInfo.map((info, index) => (
                   <div key={index} className='flex items-start'>
-                    <div className='mt-1 bg-slate-800 rounded-lg p-2 sm:p-3'>{info.icon}</div>
+                    <div className='mt-1 bg-slate-800 rounded-lg p-2 sm:p-3' aria-hidden='true'>
+                      {info.icon}
+                    </div>
                     <div className='ml-3 sm:ml-4'>
                       <h4 className='text-xs sm:text-sm font-medium text-gray-400'>{info.title}</h4>
                       {info.link ? (
                         <a
                           href={info.link}
                           className='text-sm sm:text-base text-white hover:text-indigo-400 transition-colors'
+                          aria-label={`${info.title}: ${info.content}`}
                         >
                           {info.content}
                         </a>
@@ -108,11 +117,18 @@ const Contact: FC = () => {
                 <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-3 sm:mb-4'>
                   Follow Me
                 </h3>
-                <div className='flex space-x-3 sm:space-x-4'>
+                <div
+                  className='flex space-x-3 sm:space-x-4'
+                  role='list'
+                  aria-label='Social media links'
+                >
                   <a
                     href={GITHUB_PROFILE_URL}
-                    aria-label='Visit my GitHub profile'
+                    aria-label='Visit my GitHub profile (opens in new tab)'
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    role='listitem'
                   >
                     <svg
                       className='h-4 w-4 sm:h-5 sm:w-5'
@@ -129,8 +145,11 @@ const Contact: FC = () => {
                   </a>
                   <a
                     href={LINKEDIN_PROFILE_URL}
-                    aria-label='Visit my LinkedIn profile'
+                    aria-label='Visit my LinkedIn profile (opens in new tab)'
                     className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    role='listitem'
                   >
                     <svg
                       className='h-4 w-4 sm:h-5 sm:w-5'
