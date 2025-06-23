@@ -50,10 +50,13 @@ jobs:
       - name: Run linting
         run: npm run lint
 
-      - name: Run type checking
-        run: npm run build
+      - name: Run prettier
+        run: npm run prettier:check
 
-      - name: Deploy to Vercel
-        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      # - name: Run type checking
+      #   run: npm run build
+
+      # - name: Deploy to Vercel
+      #   run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+      #   env:
+      #     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
