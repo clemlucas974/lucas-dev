@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://lucas.dev/sitemap.xml
+Sitemap: https://lucas-dev.pro/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
