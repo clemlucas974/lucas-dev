@@ -6,8 +6,8 @@ import { TypeAnimation } from 'react-type-animation';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
-import Aurora from './ui/Aurora';
 import { MaltSvg } from './icons/MaltSvg';
+import Aurora from './ui/Aurora';
 
 const Hero: FC = () => {
   const prefersReducedMotion = useReducedMotion();
