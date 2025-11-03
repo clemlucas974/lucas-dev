@@ -4,8 +4,9 @@ import { type Variants, motion } from 'framer-motion';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
 
-import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
+import { MaltSvg } from './icons/MaltSvg';
 
 interface ContactInfo {
   icon: JSX.Element;
@@ -16,13 +17,13 @@ interface ContactInfo {
 
 const contactInfo: ContactInfo[] = [
   {
-    icon: <FiMail className='h-6 w-6 text-indigo-400' />,
+    icon: <FiMail className='h-6 w-6 text-primary-400' />,
     title: 'Email',
     content: 'clement.lucas.dev@gmail.com',
     link: 'mailto:clement.lucas.dev@gmail.com',
   },
   {
-    icon: <FiMapPin className='h-6 w-6 text-purple-400' />,
+    icon: <FiMapPin className='h-6 w-6 text-secondary-400' />,
     title: 'Location',
     content: 'Saint-Paul, La Réunion',
     link: null,
@@ -54,7 +55,7 @@ const Contact: FC = () => {
   return (
     <section
       id='contact'
-      className='section bg-gradient-to-b from-slate-950 to-slate-900 relative py-16 sm:py-20'
+      className='section bg-gradient-to-b from-zinc-950 to-zinc-900 relative py-16 sm:py-20'
     >
       <div className='container px-4 sm:px-6 lg:px-8'>
         <motion.div
@@ -92,7 +93,7 @@ const Contact: FC = () => {
               <div className='space-y-4 sm:space-y-6'>
                 {contactInfo.map((info, index) => (
                   <div key={index} className='flex items-start'>
-                    <div className='mt-1 bg-slate-800 rounded-lg p-2 sm:p-3' aria-hidden='true'>
+                    <div className='mt-1 bg-zinc-800/90 rounded-lg p-2 sm:p-3' aria-hidden='true'>
                       {info.icon}
                     </div>
                     <div className='ml-3 sm:ml-4'>
@@ -100,7 +101,7 @@ const Contact: FC = () => {
                       {info.link ? (
                         <a
                           href={info.link}
-                          className='text-sm sm:text-base text-white hover:text-indigo-400 transition-colors'
+                          className='text-sm sm:text-base text-white hover:text-primary-400 transition-colors'
                           aria-label={`${info.title}: ${info.content}`}
                         >
                           {info.content}
@@ -121,7 +122,7 @@ const Contact: FC = () => {
                   <a
                     href={GITHUB_PROFILE_URL}
                     aria-label='Visit my GitHub profile (opens in new tab)'
-                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -141,7 +142,7 @@ const Contact: FC = () => {
                   <a
                     href={LINKEDIN_PROFILE_URL}
                     aria-label='Visit my LinkedIn profile (opens in new tab)'
-                    className='bg-slate-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-indigo-600 transition-colors'
+                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -157,6 +158,15 @@ const Contact: FC = () => {
                         clipRule='evenodd'
                       ></path>
                     </svg>
+                  </a>
+                  <a
+                    href={MALT_PROFILE_URL}
+                    aria-label='Visit my Malt profile (opens in new tab)'
+                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <MaltSvg className='h-4 w-4 sm:h-5 sm:w-5' />
                   </a>
                 </div>
               </div>

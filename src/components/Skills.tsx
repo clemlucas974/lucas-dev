@@ -46,8 +46,8 @@ const categories: Category[] = [
     id: 'all',
     label: 'All',
     color: 'text-white',
-    bgColor: 'bg-gradient-to-r from-indigo-600 to-purple-600',
-    borderColor: 'border-indigo-500',
+    bgColor: 'bg-gradient-to-r from-primary-600 to-secondary-600',
+    borderColor: 'border-primary-600',
   },
   {
     id: 'frontend',
@@ -139,7 +139,7 @@ const Skills: FC = () => {
   };
 
   return (
-    <section id='skills' className='section bg-slate-950 relative'>
+    <section id='skills' className='section bg-zinc-950 relative'>
       <div className='container'>
         <div className='max-w-5xl mx-auto'>
           <motion.div
@@ -174,7 +174,7 @@ const Skills: FC = () => {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeCategory === category.id
                       ? `${category.bgColor} text-white`
-                      : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
+                      : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700'
                   }`}
                   role='tab'
                   aria-selected={activeCategory === category.id}

@@ -1,12 +1,13 @@
 import { type FC } from 'react';
 
-import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
+import { MaltSvg } from './icons/MaltSvg';
 
 const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className='bg-slate-950 py-8 sm:py-12 border-t border-slate-800/50'>
+    <footer className='bg-zinc-950 py-8 sm:py-12 border-t border-zinc-800/40'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-8'>
           <div className='sm:col-span-2'>
@@ -26,6 +27,8 @@ const Footer: FC = () => {
                 href={GITHUB_PROFILE_URL}
                 aria-label='Visit my GitHub profile'
                 className='text-gray-400 hover:text-white transition-colors'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 <svg
                   className='h-5 w-5 sm:h-6 sm:w-6'
@@ -44,6 +47,8 @@ const Footer: FC = () => {
                 href={LINKEDIN_PROFILE_URL}
                 aria-label='Visit my LinkedIn profile'
                 className='text-gray-400 hover:text-white transition-colors'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 <svg
                   className='h-5 w-5 sm:h-6 sm:w-6'
@@ -57,6 +62,15 @@ const Footer: FC = () => {
                     clipRule='evenodd'
                   ></path>
                 </svg>
+              </a>
+              <a
+                href={MALT_PROFILE_URL}
+                aria-label='Visit my Malt profile (opens in new tab)'
+                className='text-gray-400 hover:text-white transition-colors'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <MaltSvg className='h-5 w-5 sm:h-6 sm:w-6' />
               </a>
             </div>
           </div>
@@ -112,7 +126,7 @@ const Footer: FC = () => {
             <ul className='space-y-3 sm:space-y-4'>
               <li className='flex items-start'>
                 <svg
-                  className='min-h-4 min-w-4 h-4 w-4 sm:min-h-5 sm:min-w-5 sm:h-5 sm:w-5 text-indigo-400 mt-0.5'
+                  className='min-h-4 min-w-4 h-4 w-4 sm:min-h-5 sm:min-w-5 sm:h-5 sm:w-5 text-primary-400 mt-0.5'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -131,7 +145,7 @@ const Footer: FC = () => {
               </li>
               <li className='flex items-start'>
                 <svg
-                  className='h-4 w-4 sm:h-5 sm:w-5 text-indigo-400 mt-0.5'
+                  className='h-4 w-4 sm:h-5 sm:w-5 text-primary-400 mt-0.5'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -158,7 +172,7 @@ const Footer: FC = () => {
           </div>
         </div>
 
-        <div className='pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-slate-800/50 text-center md:flex md:items-center md:justify-between'>
+        <div className='pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-zinc-800/40 text-center md:flex md:items-center md:justify-between'>
           <div className='text-xs sm:text-sm text-gray-300'>
             © {currentYear} Senior Fullstack Developer. All rights reserved.
           </div>

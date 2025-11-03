@@ -20,6 +20,7 @@ const navLinks: NavLink[] = [
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>('');
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -36,6 +37,38 @@ const Header: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for scroll spy
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(`#${entry.target.id}`);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    navLinks.forEach((link) => {
+      const sectionId = link.href.substring(1); // Remove the #
+      const section = document.getElementById(sectionId);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -90,7 +123,7 @@ const Header: React.FC = () => {
         <motion.div
           className={`flex items-center justify-between transition-all duration-500 ease-out backdrop-blur-sm ${
             isScrolled
-              ? 'bg-slate-900/80 rounded-full px-6 py-3 shadow-header'
+              ? 'bg-zinc-900/80 rounded-full px-6 py-3 shadow-header'
               : 'px-0 py-0 rounded-none'
           }`}
           variants={prefersReducedMotion ? reducedMotionVariants : normalMotionVariants}
@@ -125,12 +158,16 @@ const Header: React.FC = () => {
                 >
                   <a
                     href={link.href}
-                    className={`text-sm font-medium transition-all duration-300 hover:text-indigo-400 relative group ${
+                    className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 relative group ${
                       isScrolled ? 'text-gray-200' : 'text-gray-300'
-                    }`}
+                    } ${activeSection === link.href ? 'text-primary-400' : ''}`}
                   >
                     {link.name}
-                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-400 transition-all duration-300 group-hover:w-full'></span>
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-primary-400 transition-all duration-300 ${
+                        activeSection === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    ></span>
                   </a>
                 </motion.li>
               ))}
@@ -179,8 +216,8 @@ const Header: React.FC = () => {
         <div
           className={`mx-4 mt-4 rounded-2xl ${
             isScrolled
-              ? 'bg-slate-900/90 backdrop-blur-xl border border-slate-800/50'
-              : 'bg-slate-900/95 backdrop-blur-xl border border-slate-800/30'
+              ? 'bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/40'
+              : 'bg-zinc-900/95 backdrop-blur-xl border border-zinc-800/30'
           }`}
         >
           <div className='px-6 pt-4 pb-6'>
@@ -202,7 +239,7 @@ const Header: React.FC = () => {
                 >
                   <a
                     href={link.href}
-                    className='block text-base font-medium text-gray-200 hover:text-indigo-400 transition-colors duration-300'
+                    className='block text-base font-medium text-gray-200 hover:text-primary-400 transition-colors duration-300'
                     onClick={() => setMobileMenuOpen(false)}
                     tabIndex={mobileMenuOpen ? 0 : -1}
                   >

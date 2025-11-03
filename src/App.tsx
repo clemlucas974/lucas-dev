@@ -12,7 +12,7 @@ import Particles from './components/ui/Particles';
 
 const App: React.FC = () => {
   return (
-    <div className='relative min-h-screen bg-slate-950 text-gray-100 font-electrolize selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden'>
+    <div className='relative min-h-screen bg-zinc-950 text-gray-100 font-electrolize selection:bg-primary-600/30 selection:text-primary-200 overflow-x-hidden'>
       <SEO />
       <Particles className='absolute inset-0 z-0 pointer-events-none' />
 

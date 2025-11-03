@@ -4,8 +4,10 @@ import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
 
-import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL } from '../utils/links';
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
+import Aurora from './ui/Aurora';
+import { MaltSvg } from './icons/MaltSvg';
 
 const Hero: FC = () => {
   const prefersReducedMotion = useReducedMotion();
@@ -38,10 +40,27 @@ const Hero: FC = () => {
 
   return (
     <section
-      className='relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden hero-gradient'
+      className='relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden'
       aria-labelledby='hero-heading'
     >
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+      {/* Aurora Background */}
+      {!prefersReducedMotion && (
+        <div className='absolute inset-0 z-0 opacity-30'>
+          <Aurora
+            colorStops={['#00a77a', '#f4917d', '#f5e187']}
+            amplitude={1.2}
+            blend={0.6}
+            speed={0.8}
+          />
+        </div>
+      )}
+      {prefersReducedMotion && (
+        <div className='absolute inset-0 z-0'>
+          <div className='hero-gradient h-full w-full' />
+        </div>
+      )}
+
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
           <motion.article
             variants={titleVariants}
@@ -56,7 +75,7 @@ const Hero: FC = () => {
               initial='initial'
               animate='animate'
               transition={prefersReducedMotion ? {} : { delay: 0.2, duration: 0.8 }}
-              className='mb-4 inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-indigo-500/10 text-indigo-400 rounded-full text-xs sm:text-sm font-medium'
+              className='mb-4 inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-primary-500/10 text-primary-400 rounded-full text-xs sm:text-sm font-medium'
               role='text'
               aria-label='Professional title'
             >
@@ -134,7 +153,7 @@ const Hero: FC = () => {
                 href={GITHUB_PROFILE_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-slate-800'
+                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
                 aria-label='Visit my GitHub profile (opens in new tab)'
               >
                 <FiGithub className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
@@ -143,10 +162,19 @@ const Hero: FC = () => {
                 href={LINKEDIN_PROFILE_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-slate-800'
+                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
                 aria-label='Visit my LinkedIn profile (opens in new tab)'
               >
                 <FiLinkedin className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
+              </a>
+              <a
+                href={MALT_PROFILE_URL}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
+                aria-label='Visit my Malt profile (opens in new tab)'
+              >
+                <MaltSvg className='h-5 w-5 sm:h-6 sm:w-6' />
               </a>
             </motion.div>
           </motion.article>
@@ -158,9 +186,9 @@ const Hero: FC = () => {
             className='relative flex justify-center lg:justify-end mt-8 lg:mt-0'
             aria-hidden='true'
           >
-            <div className='relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-indigo-500/20 p-1 backdrop-blur-sm'>
-              <div className='absolute inset-1 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-30'></div>
-              <div className='absolute inset-[3px] rounded-full bg-slate-900 flex items-center justify-center'>
+            <div className='relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden bg-primary-600/20 p-1 backdrop-blur-sm'>
+              <div className='absolute inset-1 rounded-full bg-gradient-to-br from-primary-600 via-secondary-600 to-accent-600 opacity-30'></div>
+              <div className='absolute inset-[3px] rounded-full bg-zinc-900 flex items-center justify-center'>
                 <div className='text-center'>
                   <div className='text-4xl sm:text-5xl md:text-6xl font-electrolize font-bold title-gradient mb-2'>
                     &lt;/&gt;
@@ -171,7 +199,7 @@ const Hero: FC = () => {
                 </div>
               </div>
             </div>
-            <div className='absolute -z-10 inset-0 blur-3xl rounded-full bg-indigo-500/20 glow'></div>
+            <div className='absolute -z-10 inset-0 blur-3xl rounded-full bg-primary-600/20 glow'></div>
           </motion.div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <section id='about' className='section relative bg-gradient-radial from-slate-900 to-slate-950'>
+    <section id='about' className='section relative bg-gradient-radial from-zinc-900 to-zinc-950'>
       <div className='container'>
         <motion.div
           ref={ref}
@@ -46,7 +46,7 @@ const About: React.FC = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className='glass-card p-8 md:p-10 relative'>
-            <div className='absolute inset-0 -z-10 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-xl blur opacity-30'></div>
+            <div className='absolute inset-0 -z-10 bg-gradient-to-br from-primary-600/10 to-secondary-600/10 rounded-xl blur opacity-30'></div>
 
             <div className='mb-8'>
               <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>
@@ -69,27 +69,27 @@ const About: React.FC = () => {
             <div>
               <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>What I Do</h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
-                  <h4 className='text-indigo-400 font-medium mb-2'>Frontend Excellence</h4>
+                <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
+                  <h4 className='text-primary-400 font-medium mb-2'>Frontend Excellence</h4>
                   <p className='text-gray-400'>
                     Create beautiful, responsive, and performant user interfaces using modern
                     frameworks and best practices.
                   </p>
                 </div>
-                <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
+                <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
                   <h4 className='text-purple-400 font-medium mb-2'>Backend Architecture</h4>
                   <p className='text-gray-400'>
                     Design and implement scalable server-side applications and APIs with a focus on
                     performance and security.
                   </p>
                 </div>
-                <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
+                <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
                   <h4 className='text-teal-400 font-medium mb-2'>DevOps & Infrastructure</h4>
                   <p className='text-gray-400'>
                     Build robust CI/CD pipelines and cloud infrastructure.
                   </p>
                 </div>
-                <div className='border border-slate-800 bg-slate-900/50 rounded-lg p-4'>
+                <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
                   <h4 className='text-pink-400 font-medium mb-2'>Technical Leadership</h4>
                   <p className='text-gray-400'>
                     Lead development teams, mentor junior engineers, and ensure projects are

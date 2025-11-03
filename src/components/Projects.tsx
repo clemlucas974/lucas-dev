@@ -178,7 +178,7 @@ const Projects: FC = () => {
   };
 
   return (
-    <section id='projects' className='section bg-gradient-radial from-slate-950 to-black relative'>
+    <section id='projects' className='section bg-gradient-radial from-zinc-950 to-black relative'>
       <div className='container'>
         <motion.div
           initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
@@ -307,7 +307,7 @@ const Projects: FC = () => {
               initial='initial'
               animate='animate'
               exit='exit'
-              className='bg-slate-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto'
+              className='bg-zinc-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto'
             >
               <div className='h-56 md:h-72 overflow-hidden'>
                 <img
