@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -10,16 +12,26 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = 'LUCAS.DEV - Senior Fullstack Engineer | React, TypeScript, Node.js Expert',
-  description = 'Senior Fullstack Engineer with 10+ years experience specializing in React, TypeScript, Node.js, GraphQL, PostgreSQL, and AWS. Building exceptional digital experiences for innovative companies.',
-  keywords = 'fullstack engineer, react developer, typescript, node.js, graphql, postgresql, aws, senior developer, software engineer, web development',
+  title,
+  description,
+  keywords,
   image = 'https://lucas-dev.pro/lucas-dev-logo.jpg',
   url = 'https://lucas-dev.pro',
   type = 'website',
 }) => {
+  const { t, i18n } = useTranslation();
+
+  // Use translations as defaults if no props provided
+  const seoTitle = title || t('seo.title');
+  const seoDescription = description || t('seo.description');
+  const seoKeywords = keywords || t('seo.keywords');
+  const currentLang = i18n.language;
   useEffect(() => {
     // Update document title
-    document.title = title;
+    document.title = seoTitle;
+
+    // Update html lang attribute
+    document.documentElement.lang = currentLang;
 
     // Update meta tags
     const updateMetaTag = (name: string, content: string) => {
@@ -43,19 +55,20 @@ const SEO: React.FC<SEOProps> = ({
     };
 
     // Update primary meta tags
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
+    updateMetaTag('description', seoDescription);
+    updateMetaTag('keywords', seoKeywords);
 
     // Update Open Graph tags
-    updatePropertyTag('og:title', title);
-    updatePropertyTag('og:description', description);
+    updatePropertyTag('og:title', seoTitle);
+    updatePropertyTag('og:description', seoDescription);
     updatePropertyTag('og:image', image);
     updatePropertyTag('og:url', url);
     updatePropertyTag('og:type', type);
+    updatePropertyTag('og:locale', currentLang === 'fr' ? 'fr_FR' : 'en_US');
 
     // Update Twitter Card tags
-    updatePropertyTag('twitter:title', title);
-    updatePropertyTag('twitter:description', description);
+    updatePropertyTag('twitter:title', seoTitle);
+    updatePropertyTag('twitter:description', seoDescription);
     updatePropertyTag('twitter:image', image);
     updatePropertyTag('twitter:url', url);
 
@@ -68,12 +81,29 @@ const SEO: React.FC<SEOProps> = ({
     }
     canonical.href = url;
 
+    // Update or create hreflang tags for multilingual SEO
+    const updateHreflang = (lang: string, href: string) => {
+      let link = document.querySelector(`link[hreflang="${lang}"]`) as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = lang;
+        document.head.appendChild(link);
+      }
+      link.href = href;
+    };
+
+    // Add hreflang tags for both languages
+    updateHreflang('en', url);
+    updateHreflang('fr', url);
+    updateHreflang('x-default', url); // Default language
+
     // Cleanup function
     return () => {
       // Reset to default values when component unmounts
-      document.title = 'LUCAS.DEV - Senior Fullstack Engineer | React, TypeScript, Node.js Expert';
+      document.title = t('seo.title');
     };
-  }, [title, description, keywords, image, url, type]);
+  }, [seoTitle, seoDescription, seoKeywords, image, url, type, currentLang, t]);
 
   return null; // This component doesn't render anything
 };

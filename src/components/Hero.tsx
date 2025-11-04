@@ -103,6 +103,7 @@ const Hero: FC = () => {
               <span className='title-gradient'> {t('hero.heading.part2')} </span>
               {t('hero.heading.part3')}
             </motion.h1>
+            <motion.div>{t('hero.description')}</motion.div>
             <motion.div
               variants={descriptionVariants}
               initial='initial'

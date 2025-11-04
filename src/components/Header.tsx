@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface NavLink {
   name: string;
@@ -12,7 +13,7 @@ interface NavLink {
 }
 
 const Header: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('');
@@ -26,11 +27,6 @@ const Header: React.FC = () => {
     { name: t('header.nav.projects'), href: '#projects' },
     { name: t('header.nav.contact'), href: '#contact' },
   ];
-
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'fr' : 'en';
-    i18n.changeLanguage(newLang);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -182,10 +178,8 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Language Switcher */}
-          <motion.button
-            onClick={toggleLanguage}
-            className='hidden md:block px-3 py-1.5 text-2xl hover:opacity-80 transition-opacity'
-            aria-label={`Switch to ${i18n.language === 'en' ? 'French' : 'English'}`}
+          <motion.div
+            className='hidden md:block'
             variants={
               prefersReducedMotion
                 ? reducedMotionVariants
@@ -195,8 +189,8 @@ const Header: React.FC = () => {
             animate='animate'
             transition={prefersReducedMotion ? {} : { duration: 0.5, delay: 0.4 }}
           >
-            {i18n.language === 'en' ? '🇫🇷' : '🇬🇧'}
-          </motion.button>
+            <LanguageSwitcher />
+          </motion.div>
 
           <button
             ref={menuButtonRef}
@@ -286,14 +280,9 @@ const Header: React.FC = () => {
                 animate='animate'
                 transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.15 }}
               >
-                <button
-                  onClick={toggleLanguage}
-                  className='mt-2 w-full button-outline text-2xl'
-                  tabIndex={mobileMenuOpen ? 0 : -1}
-                  aria-label={`Switch to ${i18n.language === 'en' ? 'French' : 'English'}`}
-                >
-                  {i18n.language === 'en' ? '🇫🇷' : '🇬🇧'}
-                </button>
+                <div className='mt-2'>
+                  <LanguageSwitcher className='w-full' />
+                </div>
               </motion.li>
             </ul>
           </div>

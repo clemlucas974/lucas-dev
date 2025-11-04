@@ -1,4 +1,9 @@
 {
+  "seo": {
+    "title": "LUCAS.DEV - Ingénieur Fullstack Senior | Expert React, TypeScript, Node.js",
+    "description": "Ingénieur Fullstack Senior avec plus de 10 ans d'expérience spécialisé en React, TypeScript, Node.js, GraphQL, PostgreSQL et AWS. Créer des expériences numériques exceptionnelles pour des entreprises innovantes.",
+    "keywords": "ingénieur fullstack, développeur react, typescript, node.js, graphql, postgresql, aws, développeur senior, ingénieur logiciel, développement web"
+  },
   "header": {
     "nav": {
       "about": "À propos",
@@ -15,6 +20,7 @@
       "part2": "expériences numériques",
       "part3": "exceptionnelles"
     },
+    "description": "J'aide les startups à transformer leurs idées en produits performants, scalables et livrés avec excellence et agilité.",
     "viewProjects": "Voir les projets",
     "contactMe": "Me contacter",
     "experience": "+10 ans d'expérience",
@@ -118,7 +124,7 @@
     "followMe": "Suivez-moi",
     "email": "Email",
     "location": "Localisation",
-    "locationValue": "Saint-Paul, La Réunion"
+    "locationValue": "Saint-Paul, La Réunion | Paris, France"
   },
   "footer": {
     "description": "Ingénieur Fullstack Senior spécialisé dans les technologies web modernes et l'infrastructure cloud. Créer des expériences numériques exceptionnelles pour des entreprises innovantes.",
