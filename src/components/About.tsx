@@ -2,8 +2,10 @@ import React from 'react';
 
 import { type Variants, motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -36,12 +38,10 @@ const About: React.FC = () => {
         >
           <motion.div variants={itemVariants} className='text-center mb-16'>
             <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-6'>
-              About <span className='title-gradient'>Me</span>
+              {t('about.title')} <span className='title-gradient'>{t('about.titleAccent')}</span>
             </h2>
             <p className='text-lg text-gray-400 max-w-3xl mx-auto'>
-              I'm a passionate Senior Fullstack Engineer with over a decade of experience building
-              scalable applications and leading technical teams. I specialize in modern JavaScript
-              frameworks, cloud infrastructure, and creating exceptional digital experiences.
+              {t('about.description')}
             </p>
           </motion.div>
 
@@ -50,50 +50,41 @@ const About: React.FC = () => {
 
             <div className='mb-8'>
               <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>
-                My Journey
+                {t('about.journey.title')}
               </h3>
               <p className='text-gray-300 mb-4 leading-relaxed'>
-                I've collaborated with innovative startups and established companies to build
-                robust, scalable applications that solve real-world problems. My approach combines
-                technical excellence with a deep understanding of business needs and user
-                experience.
+                {t('about.journey.content1')}
               </p>
               <p className='text-gray-300 leading-relaxed'>
-                Throughout my career, I've led technical teams, mentored junior developers, and
-                architected systems that can withstand the test of time and scale. I'm particularly
-                passionate about clean code, performance optimization, and embracing modern
-                development practices.
+                {t('about.journey.content2')}
               </p>
             </div>
 
             <div>
-              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>What I Do</h3>
+              <h3 className='text-xl md:text-2xl font-semibold mb-4 font-electrolize'>{t('about.whatIDo.title')}</h3>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
-                  <h4 className='text-primary-400 font-medium mb-2'>Frontend Excellence</h4>
+                  <h4 className='text-primary-400 font-medium mb-2'>{t('about.whatIDo.frontend.title')}</h4>
                   <p className='text-gray-400'>
-                    Create beautiful, responsive, and performant user interfaces using modern
-                    frameworks and best practices.
+                    {t('about.whatIDo.frontend.description')}
                   </p>
                 </div>
                 <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
-                  <h4 className='text-purple-400 font-medium mb-2'>Backend Architecture</h4>
+                  <h4 className='text-purple-400 font-medium mb-2'>{t('about.whatIDo.backend.title')}</h4>
                   <p className='text-gray-400'>
-                    Design and implement scalable server-side applications and APIs with a focus on
-                    performance and security.
+                    {t('about.whatIDo.backend.description')}
                   </p>
                 </div>
                 <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
-                  <h4 className='text-teal-400 font-medium mb-2'>DevOps & Infrastructure</h4>
+                  <h4 className='text-teal-400 font-medium mb-2'>{t('about.whatIDo.devops.title')}</h4>
                   <p className='text-gray-400'>
-                    Build robust CI/CD pipelines and cloud infrastructure.
+                    {t('about.whatIDo.devops.description')}
                   </p>
                 </div>
                 <div className='border border-zinc-800/50 bg-zinc-900/50 rounded-lg p-4'>
-                  <h4 className='text-pink-400 font-medium mb-2'>Technical Leadership</h4>
+                  <h4 className='text-pink-400 font-medium mb-2'>{t('about.whatIDo.leadership.title')}</h4>
                   <p className='text-gray-400'>
-                    Lead development teams, mentor junior engineers, and ensure projects are
-                    delivered on time and to specification.
+                    {t('about.whatIDo.leadership.description')}
                   </p>
                 </div>
               </div>

@@ -1,9 +1,11 @@
 import { type FC } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { MaltSvg } from './icons/MaltSvg';
 
 const Footer: FC = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -18,8 +20,7 @@ const Footer: FC = () => {
               &lt;LUCAS.DEV/&gt;
             </a>
             <p className='text-sm sm:text-base text-gray-400 mb-4 sm:mb-6 max-w-md'>
-              Senior Fullstack Engineer specializing in modern web technologies and cloud
-              infrastructure. Building exceptional digital experiences for innovative companies.
+              {t('footer.description')}
             </p>
             <div className='flex space-x-4'>
               {/* GITHUB */}
@@ -76,14 +77,14 @@ const Footer: FC = () => {
           </div>
 
           <div>
-            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>Navigation</h3>
+            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>{t('footer.navigation')}</h3>
             <ul className='space-y-2'>
               <li>
                 <a
                   href='#'
                   className='text-sm sm:text-base text-gray-400 hover:text-white transition-colors'
                 >
-                  Home
+                  {t('footer.home')}
                 </a>
               </li>
               <li>
@@ -91,7 +92,7 @@ const Footer: FC = () => {
                   href='#about'
                   className='text-sm sm:text-base text-gray-400 hover:text-white transition-colors'
                 >
-                  About
+                  {t('footer.about')}
                 </a>
               </li>
               <li>
@@ -99,7 +100,7 @@ const Footer: FC = () => {
                   href='#skills'
                   className='text-sm sm:text-base text-gray-400 hover:text-white transition-colors'
                 >
-                  Skills
+                  {t('footer.skills')}
                 </a>
               </li>
               <li>
@@ -107,7 +108,7 @@ const Footer: FC = () => {
                   href='#projects'
                   className='text-sm sm:text-base text-gray-400 hover:text-white transition-colors'
                 >
-                  Projects
+                  {t('footer.projects')}
                 </a>
               </li>
               <li>
@@ -115,14 +116,14 @@ const Footer: FC = () => {
                   href='#contact'
                   className='text-sm sm:text-base text-gray-400 hover:text-white transition-colors'
                 >
-                  Contact
+                  {t('footer.contact')}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>Contact</h3>
+            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>{t('footer.contactTitle')}</h3>
             <ul className='space-y-3 sm:space-y-4'>
               <li className='flex items-start'>
                 <svg
@@ -165,7 +166,7 @@ const Footer: FC = () => {
                   />
                 </svg>
                 <span className='ml-3 text-sm sm:text-base text-gray-400'>
-                  Saint-Paul, La Réunion
+                  {t('contact.locationValue')}
                 </span>
               </li>
             </ul>
@@ -174,7 +175,7 @@ const Footer: FC = () => {
 
         <div className='pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-zinc-800/40 text-center md:flex md:items-center md:justify-between'>
           <div className='text-xs sm:text-sm text-gray-300'>
-            © {currentYear} Senior Fullstack Developer. All rights reserved.
+            {t('footer.rights', { year: currentYear })}
           </div>
         </div>
       </div>

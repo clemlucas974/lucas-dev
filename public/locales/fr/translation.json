@@ -1,0 +1,134 @@
+{
+  "header": {
+    "nav": {
+      "about": "À propos",
+      "skills": "Compétences",
+      "projects": "Projets",
+      "contact": "Contact"
+    },
+    "resume": "CV"
+  },
+  "hero": {
+    "title": "Ingénieur Fullstack Senior",
+    "heading": {
+      "part1": "Créer des",
+      "part2": "expériences numériques",
+      "part3": "exceptionnelles"
+    },
+    "viewProjects": "Voir les projets",
+    "contactMe": "Me contacter",
+    "experience": "+10 ans d'expérience",
+    "ariaLabels": {
+      "title": "Titre professionnel",
+      "technologies": "Technologies avec lesquelles je travaille",
+      "projects": "Voir mes projets",
+      "contact": "Me contacter",
+      "github": "Visitez mon profil GitHub (s'ouvre dans un nouvel onglet)",
+      "linkedin": "Visitez mon profil LinkedIn (s'ouvre dans un nouvel onglet)",
+      "malt": "Visitez mon profil Malt (s'ouvre dans un nouvel onglet)"
+    }
+  },
+  "about": {
+    "title": "À propos de",
+    "titleAccent": "moi",
+    "description": "Je suis un Ingénieur Fullstack Senior passionné avec plus d'une décennie d'expérience dans la création d'applications évolutives et la direction d'équipes techniques. Je me spécialise dans les frameworks JavaScript modernes, l'infrastructure cloud et la création d'expériences numériques exceptionnelles.",
+    "journey": {
+      "title": "Mon parcours",
+      "content1": "J'ai collaboré avec des startups innovantes et des entreprises établies pour construire des applications robustes et évolutives qui résolvent des problèmes concrets. Mon approche combine l'excellence technique avec une compréhension approfondie des besoins métier et de l'expérience utilisateur.",
+      "content2": "Tout au long de ma carrière, j'ai dirigé des équipes techniques, mentoré des développeurs juniors et conçu des systèmes capables de résister à l'épreuve du temps et de l'échelle. Je suis particulièrement passionné par le code propre, l'optimisation des performances et l'adoption de pratiques de développement modernes."
+    },
+    "whatIDo": {
+      "title": "Ce que je fais",
+      "frontend": {
+        "title": "Excellence Frontend",
+        "description": "Créer des interfaces utilisateur belles, réactives et performantes en utilisant des frameworks modernes et les meilleures pratiques."
+      },
+      "backend": {
+        "title": "Architecture Backend",
+        "description": "Concevoir et implémenter des applications côté serveur et des APIs évolutives avec un focus sur la performance et la sécurité."
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "description": "Construire des pipelines CI/CD robustes et une infrastructure cloud."
+      },
+      "leadership": {
+        "title": "Leadership Technique",
+        "description": "Diriger des équipes de développement, mentorer des ingénieurs juniors et assurer que les projets sont livrés dans les temps et selon les spécifications."
+      }
+    }
+  },
+  "skills": {
+    "title": "Mes",
+    "titleAccent": "compétences",
+    "description": "Un aperçu complet de mon expertise technique et de mes capacités, développées au fil des années d'expérience professionnelle.",
+    "categories": {
+      "all": "Toutes",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "other": "Autres"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "titleAccent": "phares",
+    "description": "Une vitrine de mon travail récent avec des entreprises innovantes, où j'ai dirigé les efforts de développement et créé des solutions techniques impactantes.",
+    "viewDetails": "Voir les détails",
+    "technologies": "Technologies",
+    "close": "Fermer",
+    "visitProject": "Visiter le projet",
+    "items": {
+      "naruto": {
+        "title": "Naruto Ninja Cards",
+        "description": "La seule collection numérique officielle de Naruto.",
+        "details": "Développement d'une application web pour collectionner les moments et personnages les plus emblématiques de Naruto. Naruto Ninja Cards est construit en partenariat avec les principaux détenteurs de licences d'anime japonais (Shūeisha, TV-Tokyo) et soutenu par des investisseurs et personnalités publiques de renommée mondiale, dont Alexis Ohanian (Reddit) et Mike Shinoda (Linkin Park), Xavier Niel (New Wave) et Alexandre Yazdi (Voodoo Games)."
+      },
+      "bam": {
+        "title": "BAM Karaoke Box",
+        "description": "Salles de karaoké privées, bars à cocktails, menu snack, terrasses & privatisations.",
+        "details": "Direction du processus de migration du monolithe PHP/Symfony et des données héritées vers la nouvelle architecture axée sur les sites Web Admin/Booking et l'infrastructure AWS. Conception et direction du travail freelance sur la refonte de l'infrastructure AWS avec Terraform/Terragrunt. Développement d'un algorithme interne pour une gestion efficace des réservations. Travail avec l'équipe Marketing sur le plan de balisage Analytics et construction de l'API Admin GraphQL et des API REST basées sur les principes SOLID."
+      },
+      "popchef": {
+        "title": "Popchef",
+        "description": "Frigo connecté, cafétéria réinventée avec bar à salade, coffee shop, livraison au bureau.",
+        "details": "Création de l'équipe DevOps pour migrer l'infrastructure AWS vers Terraform/k8s/helm et automatiser les pipelines CI/CD pour l'ensemble de la stack. Réduction de la dette technique tout en développant de nouveaux produits évolutifs. Refonte de l'application web desktop, création d'un prototype d'application Android React-Native pour caisse enregistreuse et stabilisation de l'application mobile du livreur."
+      },
+      "quitoque": {
+        "title": "Quitoque",
+        "description": "Le 1er service de livraison de kits repas en France",
+        "details": "Direction d'une équipe de 9 développeurs répartis entre web, mobile et backend. Gestion des processus de projet, y compris la collecte des exigences, les spécifications et les releases. Architecture et direction du développement de nouvelles applications mobiles React Native. Intégration d'outils d'analyse et de marketing sur toutes les plateformes."
+      },
+      "fastory": {
+        "title": "Fastory",
+        "description": "Plateforme de création et de partage de concours mobiles.",
+        "details": "Développeur principal sur le widget web Instagram Stories : cron NodeJS de crawling Instagram Stories, AWS Lambda & API Gateway pour surveiller la vivacité de chaque widget. Travail sur : système d'analyse personnalisé via GoogleCloud (Pub/Sub, Dataflow, BigQuery) pour suivre des centaines de milliers de visites, capture d'écran des histoires web Fastory pour les exporter en vidéos/images (Headless Chrome V1 vers Docker/Electron/xvfb), chargeur de médias avec plusieurs fournisseurs, interconnexions Business Manager Facebook et Snapchat Business, optimisation de notre lecteur vidéo web multiplateforme (HLS, réactivité, etc.), RGPD, fonctionnalités de gain instantané et de tirage au sort, migration webpack 2 vers webpack 4."
+      },
+      "swimbot": {
+        "title": "Swimbot",
+        "description": "Appareil intelligent corrigeant votre technique de nage dans l'eau et en temps réel.",
+        "details": "Ingénieur logiciel sur le logiciel embarqué Android Swimbot (Java, Android). Recherche et test d'algorithmes d'analyse de natation (Python, Java) sur des nageurs professionnels. Développement d'un tableau de bord de visualisation de données de natation en ligne. Suivi de la production en Chine : supervision de la certification CE/FCC, déplacement chez les fabricants pour valider la première vague de production à Shenzhen (Chine). L'appareil suit la technique de natation en temps réel et fournit un retour audio sur leur technique."
+      }
+    }
+  },
+  "contact": {
+    "title": "Restons en",
+    "titleAccent": "contact",
+    "description": "Vous avez un projet en tête ou souhaitez discuter d'opportunités potentielles ? J'aimerais beaucoup échanger avec vous. Envoyez-moi un message et je vous répondrai dans les plus brefs délais.",
+    "contactInfo": "Informations de contact",
+    "followMe": "Suivez-moi",
+    "email": "Email",
+    "location": "Localisation",
+    "locationValue": "Saint-Paul, La Réunion"
+  },
+  "footer": {
+    "description": "Ingénieur Fullstack Senior spécialisé dans les technologies web modernes et l'infrastructure cloud. Créer des expériences numériques exceptionnelles pour des entreprises innovantes.",
+    "navigation": "Navigation",
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "contact": "Contact",
+    "contactTitle": "Contact",
+    "rights": "© {{year}} Développeur Fullstack Senior. Tous droits réservés."
+  }
+}

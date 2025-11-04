@@ -2,6 +2,7 @@ import { type FC, useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
 
@@ -17,13 +18,12 @@ interface Project {
   client?: string;
 }
 
-const projects: Project[] = [
+const getProjects = (t: (key: string) => string): Project[] => [
   {
     id: 1,
-    title: 'Naruto Ninja Cards',
-    description: 'The only official Naruto digital collection.',
-    details:
-      'Develop web-app to collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games).',
+    title: t('projects.items.naruto.title'),
+    description: t('projects.items.naruto.description'),
+    details: t('projects.items.naruto.details'),
     image: '/naruto-ninja-cards.webp',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
@@ -32,10 +32,9 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: 'BAM Karaoke Box',
-    description: 'Private karaoke rooms, cocktail bars, snack menu, terraces & privatizations.',
-    details:
-      'Led migration process from PHP/Symfony monolith and legacy data to the new architecture focusing on Admin/Booking websites and AWS infrastructure. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles.',
+    title: t('projects.items.bam.title'),
+    description: t('projects.items.bam.description'),
+    details: t('projects.items.bam.details'),
     image: '/bam-karaoke-box.webp',
     technologies: ['NestJS', 'PostgreSQL', 'Redis', 'AWS', 'Terraform', 'GraphQL'],
     link: 'https://booking.bam-karaokebox.com/paris',
@@ -44,11 +43,9 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: 'Popchef',
-    description:
-      'Connected fridge, reinvented cafeteria with salad bar, coffee shop, office delivery.',
-    details:
-      'Created DevOps team to migrate AWS infrastructure to Terraform/k8s/helm and automate CI/CD pipelines for the entire stack. Reduced technical debt while developing new scalable products. Reworked the desktop web app, created a cash register React-Native Android app prototype, and stabilized the delivery man mobile app.',
+    title: t('projects.items.popchef.title'),
+    description: t('projects.items.popchef.description'),
+    details: t('projects.items.popchef.details'),
     image: '/popchef.webp',
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
     link: 'https://www.popchef.com',
@@ -57,9 +54,9 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: 'Quitoque',
-    description: "France's 1st meal kit delivery service",
-    details: `Led a team of 9 developers across web, mobile, and backend. Managed project processes including requirements gathering, specifications, and releases. Architected and led development of new React Native mobile applications. Integrated analytics and marketing tools across platforms.`,
+    title: t('projects.items.quitoque.title'),
+    description: t('projects.items.quitoque.description'),
+    details: t('projects.items.quitoque.details'),
     image: '/quitoque.webp',
     technologies: [
       'React',
@@ -81,9 +78,9 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    title: 'Fastory',
-    description: 'Platform for creating and sharing mobile contests.',
-    details: `Lead developer on Instagram Stories web Widget: Instagram Stories crawling NodeJS cron, AWS Lambda & API Gateway to monitor each widget's liveness. Work on: custom analytics system via GoogleCloud (Pub/Sub, Dataflow, BigQuery) to follow hundreds of thousand visits, screencast of Fastory web stories to export them as videos/images (Headless Chrome V1 to Docker/Electron/xvfb), media loader with several providers, Business Manager Facebook and Snapchat Business interconnections, optimization of our multi platform web video player (HLS, responsiveness, etc), GDPR, instant winning and draw lots features, webpack 2 to webpack 4 migration.`,
+    title: t('projects.items.fastory.title'),
+    description: t('projects.items.fastory.description'),
+    details: t('projects.items.fastory.details'),
     image: '/fastory.webp',
     technologies: [
       'React',
@@ -100,14 +97,9 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: 'Swimbot',
-    description: 'Smart device correcting your swimming technique in the water and in real time.',
-    details: `
-      Software Engineer on the Swimbot Android embedded software (Java, Android).
-      Research and testing of swimming analysis algorithms (Python, Java) on professional swimmers.
-      Develop an online swim data visualization dashboard.
-      Monitoring of production in China: supervision of CE/FCC certification, travel to manufacturers to validate the first wave of production in Shenzhen (China).
-    The device tracks swimming technique in real time and provide audio feedback on their technique.`,
+    title: t('projects.items.swimbot.title'),
+    description: t('projects.items.swimbot.description'),
+    details: t('projects.items.swimbot.details'),
     image: '/swimbot.webp',
     technologies: [
       'Android',
@@ -125,6 +117,7 @@ const projects: Project[] = [
 ];
 
 const Projects: FC = () => {
+  const { t } = useTranslation();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -133,6 +126,7 @@ const Projects: FC = () => {
     triggerOnce: true,
   });
   const prefersReducedMotion = useReducedMotion();
+  const projects = getProjects(t);
 
   // Handle escape key and focus management for modal
   useEffect(() => {
@@ -191,11 +185,10 @@ const Projects: FC = () => {
           className='text-center mb-16'
         >
           <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
-            Featured <span className='title-gradient'>Projects</span>
+            {t('projects.title')} <span className='title-gradient'>{t('projects.titleAccent')}</span>
           </h2>
           <p className='text-gray-400 max-w-3xl mx-auto'>
-            A showcase of my recent work with innovative companies, where I've led development
-            efforts and created impactful technical solutions.
+            {t('projects.description')}
           </p>
         </motion.div>
 
@@ -281,7 +274,7 @@ const Projects: FC = () => {
                       d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'
                     />
                   </svg>
-                  <p className='text-sm font-medium'>View Details</p>
+                  <p className='text-sm font-medium'>{t('projects.viewDetails')}</p>
                 </div>
               </div>
             </motion.article>
@@ -328,7 +321,7 @@ const Projects: FC = () => {
                 </p>
                 <div className='mb-6'>
                   <h4 className='text-sm uppercase text-gray-500 mb-3 tracking-wider font-medium'>
-                    Technologies
+                    {t('projects.technologies')}
                   </h4>
                   <div className='flex flex-wrap gap-2' aria-label='Technologies used'>
                     {activeProject.technologies.map((tech) => (
@@ -343,18 +336,18 @@ const Projects: FC = () => {
                     ref={closeButtonRef}
                     onClick={() => setActiveProject(null)}
                     className='button-outline'
-                    aria-label='Close project details'
+                    aria-label={t('projects.close')}
                   >
-                    Close
+                    {t('projects.close')}
                   </button>
                   <a
                     href={activeProject.link}
                     className='button-primary'
                     target='_blank'
                     rel='noopener noreferrer'
-                    aria-label={`Visit ${activeProject.title} project (opens in new tab)`}
+                    aria-label={`${t('projects.visitProject')} ${activeProject.title} (opens in new tab)`}
                   >
-                    Visit Project
+                    {t('projects.visitProject')}
                   </a>
                 </div>
               </div>

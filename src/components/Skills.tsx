@@ -24,6 +24,7 @@ import {
   SiTypescript,
 } from 'react-icons/si';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
 
@@ -41,38 +42,38 @@ interface Category {
   borderColor: string;
 }
 
-const categories: Category[] = [
+const getCategories = (t: (key: string) => string): Category[] => [
   {
     id: 'all',
-    label: 'All',
+    label: t('skills.categories.all'),
     color: 'text-white',
     bgColor: 'bg-gradient-to-r from-primary-600 to-secondary-600',
     borderColor: 'border-primary-600',
   },
   {
     id: 'frontend',
-    label: 'Frontend',
+    label: t('skills.categories.frontend'),
     color: 'text-blue-400',
     bgColor: 'bg-blue-600',
     borderColor: 'border-blue-500',
   },
   {
     id: 'backend',
-    label: 'Backend',
+    label: t('skills.categories.backend'),
     color: 'text-green-400',
     bgColor: 'bg-green-600',
     borderColor: 'border-green-500',
   },
   {
     id: 'devops',
-    label: 'DevOps',
+    label: t('skills.categories.devops'),
     color: 'text-orange-400',
     bgColor: 'bg-orange-600',
     borderColor: 'border-orange-500',
   },
   {
     id: 'other',
-    label: 'Other',
+    label: t('skills.categories.other'),
     color: 'text-purple-400',
     bgColor: 'bg-purple-600',
     borderColor: 'border-purple-500',
@@ -108,12 +109,14 @@ const skills: Skill[] = [
 ];
 
 const Skills: FC = () => {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
   const prefersReducedMotion = useReducedMotion();
+  const categories = getCategories(t);
 
   const filteredSkills =
     activeCategory === 'all' ? skills : skills.filter((skill) => skill.category === activeCategory);
@@ -153,11 +156,10 @@ const Skills: FC = () => {
             className='text-center mb-12'
           >
             <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
-              My <span className='title-gradient'>Skills</span>
+              {t('skills.title')} <span className='title-gradient'>{t('skills.titleAccent')}</span>
             </h2>
             <p className='text-gray-400 max-w-3xl mx-auto'>
-              A comprehensive overview of my technical expertise and abilities, developed over years
-              of professional experience.
+              {t('skills.description')}
             </p>
           </motion.div>
 

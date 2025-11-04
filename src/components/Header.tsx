@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
@@ -10,20 +11,26 @@ interface NavLink {
   href: string;
 }
 
-const navLinks: NavLink[] = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
-];
-
 const Header: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  const navLinks: NavLink[] = [
+    { name: t('header.nav.about'), href: '#about' },
+    { name: t('header.nav.skills'), href: '#skills' },
+    { name: t('header.nav.projects'), href: '#projects' },
+    { name: t('header.nav.contact'), href: '#contact' },
+  ];
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'fr' : 'en';
+    i18n.changeLanguage(newLang);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -174,14 +181,22 @@ const Header: React.FC = () => {
             </ul>
           </nav>
 
-          {/* <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className='hidden md:block button-primary'
+          {/* Language Switcher */}
+          <motion.button
+            onClick={toggleLanguage}
+            className='hidden md:block px-3 py-1.5 text-2xl hover:opacity-80 transition-opacity'
+            aria-label={`Switch to ${i18n.language === 'en' ? 'French' : 'English'}`}
+            variants={
+              prefersReducedMotion
+                ? reducedMotionVariants
+                : { initial: { opacity: 0 }, animate: { opacity: 1 } }
+            }
+            initial='initial'
+            animate='animate'
+            transition={prefersReducedMotion ? {} : { duration: 0.5, delay: 0.4 }}
           >
-            Resume
-          </motion.button> */}
+            {i18n.language === 'en' ? '🇫🇷' : '🇬🇧'}
+          </motion.button>
 
           <button
             ref={menuButtonRef}
@@ -258,7 +273,26 @@ const Header: React.FC = () => {
                 transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.1 }}
               >
                 <button className='mt-2 w-full button-primary' tabIndex={mobileMenuOpen ? 0 : -1}>
-                  Resume
+                  {t('header.resume')}
+                </button>
+              </motion.li>
+              <motion.li
+                variants={
+                  prefersReducedMotion
+                    ? { initial: { opacity: 1, x: 0 }, animate: { opacity: 1, x: 0 } }
+                    : { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 } }
+                }
+                initial='initial'
+                animate='animate'
+                transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.15 }}
+              >
+                <button
+                  onClick={toggleLanguage}
+                  className='mt-2 w-full button-outline text-2xl'
+                  tabIndex={mobileMenuOpen ? 0 : -1}
+                  aria-label={`Switch to ${i18n.language === 'en' ? 'French' : 'English'}`}
+                >
+                  {i18n.language === 'en' ? '🇫🇷' : '🇬🇧'}
                 </button>
               </motion.li>
             </ul>

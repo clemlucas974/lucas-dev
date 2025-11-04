@@ -1,15 +1,17 @@
 import type { FC } from 'react';
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { TypeAnimation } from 'react-type-animation';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
 import { MaltSvg } from './icons/MaltSvg';
-import Aurora from './ui/Aurora';
+import Plasma from './ui/Plasma';
 
 const Hero: FC = () => {
+  const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
 
   // Reduced motion variants
@@ -46,11 +48,19 @@ const Hero: FC = () => {
       {/* Aurora Background */}
       {!prefersReducedMotion && (
         <div className='absolute inset-0 z-0 opacity-30'>
-          <Aurora
+          {/* <Aurora
             colorStops={['#00a77a', '#f4917d', '#f5e187']}
             amplitude={1.2}
             blend={0.6}
             speed={0.8}
+          /> */}
+          <Plasma
+            color='#00a77a'
+            speed={0.6}
+            direction='forward'
+            scale={1.1}
+            opacity={0.8}
+            mouseInteractive={true}
           />
         </div>
       )}
@@ -77,9 +87,9 @@ const Hero: FC = () => {
               transition={prefersReducedMotion ? {} : { delay: 0.2, duration: 0.8 }}
               className='mb-4 inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-primary-500/10 text-primary-400 rounded-full text-xs sm:text-sm font-medium'
               role='text'
-              aria-label='Professional title'
+              aria-label={t('hero.ariaLabels.title')}
             >
-              Senior Fullstack Engineer
+              {t('hero.title')}
             </motion.div>
             <motion.h1
               id='hero-heading'
@@ -89,9 +99,9 @@ const Hero: FC = () => {
               transition={prefersReducedMotion ? {} : { delay: 0.3, duration: 0.8 }}
               className=' sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 font-electrolize text-base/5'
             >
-              Building
-              <span className='title-gradient'> exceptional </span>
-              digital experiences
+              {t('hero.heading.part1')}
+              <span className='title-gradient'> {t('hero.heading.part2')} </span>
+              {t('hero.heading.part3')}
             </motion.h1>
             <motion.div
               variants={descriptionVariants}
@@ -100,7 +110,7 @@ const Hero: FC = () => {
               transition={prefersReducedMotion ? {} : { delay: 0.4, duration: 0.8 }}
               className='text-lg sm:text-xl md:text-2xl text-gray-400 mb-6 sm:mb-8'
               aria-live='polite'
-              aria-label='Technologies I work with'
+              aria-label={t('hero.ariaLabels.technologies')}
             >
               <TypeAnimation
                 sequence={[
@@ -114,7 +124,7 @@ const Hero: FC = () => {
                 repeat={Infinity}
                 cursor={true}
                 className='inline-block'
-                aria-label='Technologies I specialize in'
+                aria-label={t('hero.ariaLabels.technologies')}
                 speed={prefersReducedMotion ? 50 : 40}
               />
             </motion.div>
@@ -129,16 +139,16 @@ const Hero: FC = () => {
               <a
                 href='#projects'
                 className='button-primary text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-2.5'
-                aria-label='View my projects'
+                aria-label={t('hero.ariaLabels.projects')}
               >
-                View Projects
+                {t('hero.viewProjects')}
               </a>
               <a
                 href='#contact'
                 className='button-outline text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-2.5'
-                aria-label='Contact me'
+                aria-label={t('hero.ariaLabels.contact')}
               >
-                Contact Me
+                {t('hero.contactMe')}
               </a>
             </motion.nav>
             <motion.div
@@ -154,7 +164,7 @@ const Hero: FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
-                aria-label='Visit my GitHub profile (opens in new tab)'
+                aria-label={t('hero.ariaLabels.github')}
               >
                 <FiGithub className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
               </a>
@@ -163,7 +173,7 @@ const Hero: FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
-                aria-label='Visit my LinkedIn profile (opens in new tab)'
+                aria-label={t('hero.ariaLabels.linkedin')}
               >
                 <FiLinkedin className='h-5 w-5 sm:h-6 sm:w-6' aria-hidden='true' />
               </a>
@@ -172,7 +182,7 @@ const Hero: FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/80'
-                aria-label='Visit my Malt profile (opens in new tab)'
+                aria-label={t('hero.ariaLabels.malt')}
               >
                 <MaltSvg className='h-5 w-5 sm:h-6 sm:w-6' />
               </a>
@@ -194,7 +204,7 @@ const Hero: FC = () => {
                     &lt;/&gt;
                   </div>
                   <p className='text-gray-300 text-xs sm:text-sm md:text-base uppercase font-bold'>
-                    10+ years experience
+                    {t('hero.experience')}
                   </p>
                 </div>
               </div>

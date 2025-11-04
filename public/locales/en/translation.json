@@ -1,0 +1,134 @@
+{
+  "header": {
+    "nav": {
+      "about": "About",
+      "skills": "Skills",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "resume": "Resume"
+  },
+  "hero": {
+    "title": "Senior Fullstack Engineer",
+    "heading": {
+      "part1": "Building",
+      "part2": "exceptional",
+      "part3": "digital experiences"
+    },
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me",
+    "experience": "10+ years experience",
+    "ariaLabels": {
+      "title": "Professional title",
+      "technologies": "Technologies I work with",
+      "projects": "View my projects",
+      "contact": "Contact me",
+      "github": "Visit my GitHub profile (opens in new tab)",
+      "linkedin": "Visit my LinkedIn profile (opens in new tab)",
+      "malt": "Visit my Malt profile (opens in new tab)"
+    }
+  },
+  "about": {
+    "title": "About",
+    "titleAccent": "Me",
+    "description": "I'm a passionate Senior Fullstack Engineer with over a decade of experience building scalable applications and leading technical teams. I specialize in modern JavaScript frameworks, cloud infrastructure, and creating exceptional digital experiences.",
+    "journey": {
+      "title": "My Journey",
+      "content1": "I've collaborated with innovative startups and established companies to build robust, scalable applications that solve real-world problems. My approach combines technical excellence with a deep understanding of business needs and user experience.",
+      "content2": "Throughout my career, I've led technical teams, mentored junior developers, and architected systems that can withstand the test of time and scale. I'm particularly passionate about clean code, performance optimization, and embracing modern development practices."
+    },
+    "whatIDo": {
+      "title": "What I Do",
+      "frontend": {
+        "title": "Frontend Excellence",
+        "description": "Create beautiful, responsive, and performant user interfaces using modern frameworks and best practices."
+      },
+      "backend": {
+        "title": "Backend Architecture",
+        "description": "Design and implement scalable server-side applications and APIs with a focus on performance and security."
+      },
+      "devops": {
+        "title": "DevOps & Infrastructure",
+        "description": "Build robust CI/CD pipelines and cloud infrastructure."
+      },
+      "leadership": {
+        "title": "Technical Leadership",
+        "description": "Lead development teams, mentor junior engineers, and ensure projects are delivered on time and to specification."
+      }
+    }
+  },
+  "skills": {
+    "title": "My",
+    "titleAccent": "Skills",
+    "description": "A comprehensive overview of my technical expertise and abilities, developed over years of professional experience.",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "other": "Other"
+    }
+  },
+  "projects": {
+    "title": "Featured",
+    "titleAccent": "Projects",
+    "description": "A showcase of my recent work with innovative companies, where I've led development efforts and created impactful technical solutions.",
+    "viewDetails": "View Details",
+    "technologies": "Technologies",
+    "close": "Close",
+    "visitProject": "Visit Project",
+    "items": {
+      "naruto": {
+        "title": "Naruto Ninja Cards",
+        "description": "The only official Naruto digital collection.",
+        "details": "Develop web-app to collect the most iconic Naruto moments and characters. Naruto Ninja Cards is built in partnerships with major Japanese Anime licensors (Shūeisha, TV-Tokyo) and backed by world-class investors and public figures including Alexis Ohanian (Reddit) and Mike Shinoda (Linkin Park), Xavier Niel (New Wave) and Alexandre Yazdi (Voodoo Games)."
+      },
+      "bam": {
+        "title": "BAM Karaoke Box",
+        "description": "Private karaoke rooms, cocktail bars, snack menu, terraces & privatizations.",
+        "details": "Led migration process from PHP/Symfony monolith and legacy data to the new architecture focusing on Admin/Booking websites and AWS infrastructure. Designed and led freelance on AWS infrastructure re-work with Terraform/Terragrunt. Developed internal algorithm for efficient booking management. Worked with Marketing team on Analytics Tagging Plan and built GraphQL Admin API and REST APIs based on SOLID principles."
+      },
+      "popchef": {
+        "title": "Popchef",
+        "description": "Connected fridge, reinvented cafeteria with salad bar, coffee shop, office delivery.",
+        "details": "Created DevOps team to migrate AWS infrastructure to Terraform/k8s/helm and automate CI/CD pipelines for the entire stack. Reduced technical debt while developing new scalable products. Reworked the desktop web app, created a cash register React-Native Android app prototype, and stabilized the delivery man mobile app."
+      },
+      "quitoque": {
+        "title": "Quitoque",
+        "description": "France's 1st meal kit delivery service",
+        "details": "Led a team of 9 developers across web, mobile, and backend. Managed project processes including requirements gathering, specifications, and releases. Architected and led development of new React Native mobile applications. Integrated analytics and marketing tools across platforms."
+      },
+      "fastory": {
+        "title": "Fastory",
+        "description": "Platform for creating and sharing mobile contests.",
+        "details": "Lead developer on Instagram Stories web Widget: Instagram Stories crawling NodeJS cron, AWS Lambda & API Gateway to monitor each widget's liveness. Work on: custom analytics system via GoogleCloud (Pub/Sub, Dataflow, BigQuery) to follow hundreds of thousand visits, screencast of Fastory web stories to export them as videos/images (Headless Chrome V1 to Docker/Electron/xvfb), media loader with several providers, Business Manager Facebook and Snapchat Business interconnections, optimization of our multi platform web video player (HLS, responsiveness, etc), GDPR, instant winning and draw lots features, webpack 2 to webpack 4 migration."
+      },
+      "swimbot": {
+        "title": "Swimbot",
+        "description": "Smart device correcting your swimming technique in the water and in real time.",
+        "details": "Software Engineer on the Swimbot Android embedded software (Java, Android). Research and testing of swimming analysis algorithms (Python, Java) on professional swimmers. Develop an online swim data visualization dashboard. Monitoring of production in China: supervision of CE/FCC certification, travel to manufacturers to validate the first wave of production in Shenzhen (China). The device tracks swimming technique in real time and provide audio feedback on their technique."
+      }
+    }
+  },
+  "contact": {
+    "title": "Let's",
+    "titleAccent": "Connect",
+    "description": "Have a project in mind or want to discuss potential opportunities? I'd love to hear from you. Drop me a message and I'll get back to you as soon as possible.",
+    "contactInfo": "Contact Information",
+    "followMe": "Follow Me",
+    "email": "Email",
+    "location": "Location",
+    "locationValue": "Saint-Paul, La Réunion"
+  },
+  "footer": {
+    "description": "Senior Fullstack Engineer specializing in modern web technologies and cloud infrastructure. Building exceptional digital experiences for innovative companies.",
+    "navigation": "Navigation",
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "contactTitle": "Contact",
+    "rights": "© {{year}} Senior Fullstack Developer. All rights reserved."
+  }
+}

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { Analytics } from '@vercel/analytics/react';
 
 import App from './App';
+import './i18n/i18n';
 import './index.css';
 
 const rootElement = document.getElementById('root');

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { type Variants, motion } from 'framer-motion';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
@@ -15,27 +16,29 @@ interface ContactInfo {
   link: string | null;
 }
 
-const contactInfo: ContactInfo[] = [
+const getContactInfo = (t: (key: string) => string): ContactInfo[] => [
   {
     icon: <FiMail className='h-6 w-6 text-primary-400' />,
-    title: 'Email',
+    title: t('contact.email'),
     content: 'clement.lucas.dev@gmail.com',
     link: 'mailto:clement.lucas.dev@gmail.com',
   },
   {
     icon: <FiMapPin className='h-6 w-6 text-secondary-400' />,
-    title: 'Location',
-    content: 'Saint-Paul, La Réunion',
+    title: t('contact.location'),
+    content: t('contact.locationValue'),
     link: null,
   },
 ];
 
 const Contact: FC = () => {
+  const { t } = useTranslation();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
   const prefersReducedMotion = useReducedMotion();
+  const contactInfo = getContactInfo(t);
 
   const containerVariants: Variants = {
     hidden: { opacity: prefersReducedMotion ? 1 : 0 },
@@ -69,11 +72,10 @@ const Contact: FC = () => {
           className='text-center mb-12 sm:mb-16'
         >
           <h2 className='font-electrolize text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4'>
-            Let's <span className='title-gradient'>Connect</span>
+            {t('contact.title')} <span className='title-gradient'>{t('contact.titleAccent')}</span>
           </h2>
           <p className='text-sm sm:text-base text-gray-400 max-w-2xl mx-auto'>
-            Have a project in mind or want to discuss potential opportunities? I'd love to hear from
-            you. Drop me a message and I'll get back to you as soon as possible.
+            {t('contact.description')}
           </p>
         </motion.div>
 
@@ -87,7 +89,7 @@ const Contact: FC = () => {
           <motion.div variants={itemVariants}>
             <div className='glass-card p-5 sm:p-6 md:p-8'>
               <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-4 sm:mb-6'>
-                Contact Information
+                {t('contact.contactInfo')}
               </h3>
 
               <div className='space-y-4 sm:space-y-6'>
@@ -116,7 +118,7 @@ const Contact: FC = () => {
 
               <div className='mt-8 sm:mt-10'>
                 <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-3 sm:mb-4'>
-                  Follow Me
+                  {t('contact.followMe')}
                 </h3>
                 <div className='flex space-x-3 sm:space-x-4' aria-label='Social media links'>
                   <a
