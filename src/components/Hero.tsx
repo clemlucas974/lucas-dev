@@ -60,7 +60,7 @@ const Hero: FC = () => {
             direction='forward'
             scale={1.1}
             opacity={0.8}
-            mouseInteractive={true}
+            mouseInteractive={false}
           />
         </div>
       )}
