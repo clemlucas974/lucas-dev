@@ -1,8 +1,8 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
+import { useInView } from 'react-intersection-observer';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
 
@@ -185,11 +185,10 @@ const Projects: FC = () => {
           className='text-center mb-16'
         >
           <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
-            {t('projects.title')} <span className='title-gradient'>{t('projects.titleAccent')}</span>
+            {t('projects.title')}{' '}
+            <span className='title-gradient'>{t('projects.titleAccent')}</span>
           </h2>
-          <p className='text-gray-400 max-w-3xl mx-auto'>
-            {t('projects.description')}
-          </p>
+          <p className='text-gray-400 max-w-3xl mx-auto'>{t('projects.description')}</p>
         </motion.div>
 
         <motion.div

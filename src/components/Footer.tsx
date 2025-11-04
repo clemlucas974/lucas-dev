@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 
 import { useTranslation } from 'react-i18next';
+
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { MaltSvg } from './icons/MaltSvg';
 
@@ -77,7 +78,9 @@ const Footer: FC = () => {
           </div>
 
           <div>
-            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>{t('footer.navigation')}</h3>
+            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>
+              {t('footer.navigation')}
+            </h3>
             <ul className='space-y-2'>
               <li>
                 <a
@@ -123,7 +126,9 @@ const Footer: FC = () => {
           </div>
 
           <div>
-            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>{t('footer.contactTitle')}</h3>
+            <h3 className='text-white font-medium text-base sm:text-lg mb-3 sm:mb-4'>
+              {t('footer.contactTitle')}
+            </h3>
             <ul className='space-y-3 sm:space-y-4'>
               <li className='flex items-start'>
                 <svg

@@ -1,6 +1,7 @@
 import { type FC, useState } from 'react';
 
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   SiAmazon,
   SiCss3,
@@ -24,7 +25,6 @@ import {
   SiTypescript,
 } from 'react-icons/si';
 import { useInView } from 'react-intersection-observer';
-import { useTranslation } from 'react-i18next';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
 
@@ -158,9 +158,7 @@ const Skills: FC = () => {
             <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
               {t('skills.title')} <span className='title-gradient'>{t('skills.titleAccent')}</span>
             </h2>
-            <p className='text-gray-400 max-w-3xl mx-auto'>
-              {t('skills.description')}
-            </p>
+            <p className='text-gray-400 max-w-3xl mx-auto'>{t('skills.description')}</p>
           </motion.div>
 
           <div className='mb-10'>

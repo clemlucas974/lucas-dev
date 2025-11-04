@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 
 import { type Variants, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
-import { useTranslation } from 'react-i18next';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
