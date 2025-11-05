@@ -5,8 +5,9 @@
 /* Portiso Font */
 @font-face {
   font-family: 'Portiso';
-  src: url('/fonts/portiso-regular.otf') format('opentype'),
-       url('/fonts/portiso-regular.ttf') format('truetype');
+  src:
+    url('/fonts/portiso-regular.otf') format('opentype'),
+    url('/fonts/portiso-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,8 +15,9 @@
 
 @font-face {
   font-family: 'Portiso';
-  src: url('/fonts/portiso-italic.otf') format('opentype'),
-       url('/fonts/portiso-italic.ttf') format('truetype');
+  src:
+    url('/fonts/portiso-italic.otf') format('opentype'),
+    url('/fonts/portiso-italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
