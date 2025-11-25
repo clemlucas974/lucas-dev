@@ -8,7 +8,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
 import { MaltSvg } from './icons/MaltSvg';
-import Plasma from './ui/Plasma';
+import Aurora from './ui/Aurora';
 
 const Hero: FC = () => {
   const { t } = useTranslation();
@@ -48,20 +48,20 @@ const Hero: FC = () => {
       {/* Aurora Background */}
       {!prefersReducedMotion && (
         <div className='absolute inset-0 z-0 opacity-30'>
-          {/* <Aurora
+          <Aurora
             colorStops={['#00a77a', '#f4917d', '#f5e187']}
             amplitude={1.2}
             blend={0.6}
             speed={0.8}
-          /> */}
-          <Plasma
+          />
+          {/* <Plasma
             color='#00a77a'
             speed={0.6}
             direction='forward'
             scale={1.1}
             opacity={0.8}
             mouseInteractive={false}
-          />
+          /> */}
         </div>
       )}
       {prefersReducedMotion && (
