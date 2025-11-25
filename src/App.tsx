@@ -8,13 +8,14 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import SEO from './components/SEO';
 import Skills from './components/Skills';
-import Particles from './components/ui/Particles';
+
+// import Particles from './components/ui/Particles';
 
 const App: React.FC = () => {
   return (
     <div className='relative min-h-screen bg-zinc-950 text-gray-100 font-electrolize selection:bg-primary-600/30 selection:text-primary-200 overflow-x-hidden'>
       <SEO />
-      <Particles className='absolute inset-0 z-0 pointer-events-none' />
+      {/* <Particles className='absolute inset-0 z-0 pointer-events-none' /> */}
 
       {/* Skip to main content link for accessibility */}
       <a href='#main-content' className='skip-link'>
