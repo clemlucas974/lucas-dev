@@ -6,6 +6,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
 import LanguageSwitcher from './LanguageSwitcher';
+import Logo from './Logo';
 
 interface NavLink {
   name: string;
@@ -125,10 +126,10 @@ const Header: React.FC = () => {
     >
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <motion.div
-          className={`flex items-center justify-between transition-all duration-500 ease-out backdrop-blur-sm ${
+          className={`flex items-center justify-between transition-all duration-500 ease-out ${
             isScrolled
-              ? 'bg-zinc-900/80 rounded-full px-6 py-3 shadow-header'
-              : 'px-0 py-0 rounded-none'
+              ? 'rounded-full border border-line bg-paper/80 px-5 py-2.5 shadow-[0_10px_30px_-18px_hsl(30_30%_25%_/_0.5)] backdrop-blur-md'
+              : 'rounded-none border border-transparent px-0 py-1'
           }`}
           variants={prefersReducedMotion ? reducedMotionVariants : normalMotionVariants}
           initial='initial'
@@ -137,7 +138,8 @@ const Header: React.FC = () => {
         >
           <motion.a
             href='#'
-            className='text-xl sm:text-2xl font-bold text-gradient font-electrolize'
+            className='text-lg transition-opacity hover:opacity-80 sm:text-xl'
+            aria-label='lucas.dev — home'
             variants={
               prefersReducedMotion
                 ? reducedMotionVariants
@@ -147,64 +149,63 @@ const Header: React.FC = () => {
             animate='animate'
             transition={prefersReducedMotion ? {} : { duration: 0.5 }}
           >
-            &lt;LUCAS.DEV/&gt;
+            <Logo />
           </motion.a>
 
-          <nav className='hidden md:block'>
-            <ul className='flex space-x-6 lg:space-x-8'>
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.name}
-                  variants={navItemVariants}
-                  initial='initial'
-                  animate='animate'
-                  transition={prefersReducedMotion ? {} : { delay: 0.1 * i, duration: 0.5 }}
-                >
-                  <a
-                    href={link.href}
-                    className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 relative group ${
-                      isScrolled ? 'text-gray-200' : 'text-gray-300'
-                    } ${activeSection === link.href ? 'text-primary-400' : ''}`}
+          {/* Right cluster: nav · language · menu */}
+          <div className='flex items-center gap-3 sm:gap-5'>
+            <nav className='hidden md:block'>
+              <ul className='flex space-x-6 lg:space-x-8'>
+                {navLinks.map((link, i) => (
+                  <motion.li
+                    key={link.name}
+                    variants={navItemVariants}
+                    initial='initial'
+                    animate='animate'
+                    transition={prefersReducedMotion ? {} : { delay: 0.1 * i, duration: 0.5 }}
                   >
-                    {link.name}
-                    <span
-                      className={`absolute -bottom-1 left-0 h-0.5 bg-primary-400 transition-all duration-300 ${
-                        activeSection === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                    <a
+                      href={link.href}
+                      className={`group relative text-sm font-medium tracking-wide transition-colors duration-300 hover:text-emerald-800 ${
+                        activeSection === link.href ? 'text-emerald-800' : 'text-ink-soft'
                       }`}
-                    ></span>
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
+                    >
+                      {link.name}
+                      <span
+                        className={`absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-coral-600 transition-all duration-300 ${
+                          activeSection === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
+                      ></span>
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
 
-          {/* Language Switcher */}
-          <motion.div
-            className='hidden md:block'
-            variants={
-              prefersReducedMotion
-                ? reducedMotionVariants
-                : { initial: { opacity: 0 }, animate: { opacity: 1 } }
-            }
-            initial='initial'
-            animate='animate'
-            transition={prefersReducedMotion ? {} : { duration: 0.5, delay: 0.4 }}
-          >
-            <LanguageSwitcher />
-          </motion.div>
+            <motion.div
+              variants={
+                prefersReducedMotion
+                  ? reducedMotionVariants
+                  : { initial: { opacity: 0 }, animate: { opacity: 1 } }
+              }
+              initial='initial'
+              animate='animate'
+              transition={prefersReducedMotion ? {} : { duration: 0.5, delay: 0.4 }}
+            >
+              <LanguageSwitcher />
+            </motion.div>
 
-          <button
-            ref={menuButtonRef}
-            className={`block md:hidden transition-colors duration-300 ${
-              isScrolled ? 'text-gray-200 hover:text-white' : 'text-gray-300 hover:text-white'
-            }`}
-            onClick={toggleMobileMenu}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-            aria-controls='mobile-menu'
-          >
-            {mobileMenuOpen ? <FiX className='h-6 w-6' /> : <FiMenu className='h-6 w-6' />}
-          </button>
+            <button
+              ref={menuButtonRef}
+              className='block text-ink-soft transition-colors duration-300 hover:text-emerald-800 md:hidden'
+              onClick={toggleMobileMenu}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls='mobile-menu'
+            >
+              {mobileMenuOpen ? <FiX className='h-6 w-6' /> : <FiMenu className='h-6 w-6' />}
+            </button>
+          </div>
         </motion.div>
       </div>
 
@@ -223,13 +224,7 @@ const Header: React.FC = () => {
         aria-modal='true'
         aria-labelledby='mobile-menu-title'
       >
-        <div
-          className={`mx-4 mt-4 rounded-2xl ${
-            isScrolled
-              ? 'bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/40'
-              : 'bg-zinc-900/95 backdrop-blur-xl border border-zinc-800/30'
-          }`}
-        >
+        <div className='surface mx-4 mt-4 !rounded-3xl'>
           <div className='px-6 pt-4 pb-6'>
             <h2 id='mobile-menu-title' className='sr-only'>
               Navigation Menu
@@ -249,7 +244,7 @@ const Header: React.FC = () => {
                 >
                   <a
                     href={link.href}
-                    className='block text-base font-medium text-gray-200 hover:text-primary-400 transition-colors duration-300'
+                    className='block text-base font-medium text-ink-soft transition-colors duration-300 hover:text-emerald-800'
                     onClick={() => setMobileMenuOpen(false)}
                     tabIndex={mobileMenuOpen ? 0 : -1}
                   >
@@ -257,34 +252,6 @@ const Header: React.FC = () => {
                   </a>
                 </motion.li>
               ))}
-              <motion.li
-                variants={
-                  prefersReducedMotion
-                    ? { initial: { opacity: 1, x: 0 }, animate: { opacity: 1, x: 0 } }
-                    : { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 } }
-                }
-                initial='initial'
-                animate='animate'
-                transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.1 }}
-              >
-                <button className='mt-2 w-full button-primary' tabIndex={mobileMenuOpen ? 0 : -1}>
-                  {t('header.resume')}
-                </button>
-              </motion.li>
-              <motion.li
-                variants={
-                  prefersReducedMotion
-                    ? { initial: { opacity: 1, x: 0 }, animate: { opacity: 1, x: 0 } }
-                    : { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 } }
-                }
-                initial='initial'
-                animate='animate'
-                transition={prefersReducedMotion ? {} : { duration: 0.3, delay: 0.15 }}
-              >
-                <div className='mt-2'>
-                  <LanguageSwitcher className='w-full' />
-                </div>
-              </motion.li>
             </ul>
           </div>
         </div>

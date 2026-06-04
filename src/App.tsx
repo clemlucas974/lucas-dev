@@ -13,16 +13,18 @@ import Skills from './components/Skills';
 
 const App: React.FC = () => {
   return (
-    <div className='relative min-h-screen bg-zinc-950 text-gray-100 font-electrolize selection:bg-primary-600/30 selection:text-primary-200 overflow-x-hidden'>
+    <div className='relative min-h-screen overflow-x-hidden bg-paper font-sans text-ink'>
       <SEO />
-      {/* <Particles className='absolute inset-0 z-0 pointer-events-none' /> */}
+
+      {/* Paper grain texture overlay */}
+      <div className='grain' aria-hidden='true' />
 
       {/* Skip to main content link for accessibility */}
       <a href='#main-content' className='skip-link'>
         Skip to main content
       </a>
 
-      <div className='relative z-10 flex flex-col min-h-screen'>
+      <div className='relative z-10 flex min-h-screen flex-col'>
         <Header />
         <main id='main-content' className='flex-grow' role='main' aria-label='Portfolio content'>
           <Hero />

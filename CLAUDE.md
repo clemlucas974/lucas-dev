@@ -38,10 +38,10 @@ npm run format
 
 ### Component Architecture
 Single-page application with section-based components:
-- `App.tsx` - Main layout with sections rendered in order: Hero → About → Skills → Projects → Contact
+- `App.tsx` - Main layout with sections rendered in order: Hero → About → Skills → Projects → Contact. Renders a fixed `.grain` paper-texture overlay.
 - `SEO.tsx` - Handles dynamic meta tags and structured data (must be rendered first in App)
-- `Particles.tsx` - Background animation layer (positioned absolute, z-0, pointer-events-none)
 - Section components in `src/components/`: Hero, About, Skills, Projects, Contact, Header, Footer
+- `src/components/ui/` contains legacy WebGL backgrounds (Aurora, Plasma, Particles) — **no longer used**; backgrounds are now pure-CSS organic `.blob` shapes
 
 ### Accessibility Features
 - Skip-to-content link for keyboard navigation
@@ -50,16 +50,18 @@ Single-page application with section-based components:
 - All animations respect `prefersReducedMotion` state
 - Focus management in modal dialogs (Projects component)
 
-### Styling System
-- **Tailwind CSS** with custom configuration:
-  - Custom color palettes: primary (indigo), secondary (purple), accent (teal)
-  - Custom fonts: Electrolize (display), Inter (sans), Clash Display
-  - Custom animations: fade-in, fade-in-up, slide-up, slide-down, float, pulse-slow
-  - Dark mode class strategy (`darkMode: 'class'`)
-  - Glass-card and tech-pill utilities (defined in `src/index.css`)
+### Styling System — "Warm Atelier" (Organic Warm Minimal, light theme)
+- **Aesthetic:** warm cream paper, espresso ink, brand emerald/coral/honey accents, soft organic gradient blobs, paper grain texture. Replaces the previous dark/glass-card theme.
+- **Tailwind CSS** custom config:
+  - Warm palette tokens: `paper`, `sand`, `shell`, `card`, `ink`/`ink-soft`, `taupe`, `line` (HSL CSS vars in `src/index.css :root`)
+  - Brand scales: `emerald` (primary, #00a77a), `coral` (secondary, #f17b63), `honey` (accent, #f5e187). Legacy `primary`/`secondary`/`accent` keys retained for compat.
+  - **Fonts:** `font-display` = Fraunces (warm optical serif, used for h1–h3) · `font-sans` = Space Grotesk (body/UI) · `font-electrolize` = Electrolize (the `<LUCAS.DEV/>` wordmark only)
+- **Component utilities** (in `src/index.css @layer components`): `.surface` (raised warm card — the glass-card replacement), `.eyebrow` (tracked section label with leading rule), `.btn-primary` / `.btn-ghost`, `.chip` (tech pill), `.mark` (honey marker-highlight behind a word). Sections alternate `bg-paper` / `bg-sand` / `bg-shell`.
+- **Backgrounds:** `.blob` organic CSS gradients (`.blob-emerald/-coral/-honey`) with `animate-drift`; `.grain` SVG noise overlay. No WebGL.
 
 ### Animation Strategy
-- **Framer Motion** for all animations
+- **Framer Motion** for entrance/scroll animations; sparse and purposeful
+- CSS keyframes for ambient motion: `drift` (blobs), `float-soft`, `spin-slow` (hero orbit ring) — all disabled under `prefers-reduced-motion`
 - **react-intersection-observer** for scroll-triggered animations
 - Animation variants pattern used throughout:
   ```typescript

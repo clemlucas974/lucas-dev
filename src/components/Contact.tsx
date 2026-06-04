@@ -2,173 +2,139 @@ import type { FC } from 'react';
 
 import { type Variants, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FiMail, FiMapPin } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail, FiMapPin } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
 
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, MALT_PROFILE_URL } from '../utils/links';
 import { useReducedMotion } from '../utils/useReducedMotion';
 import { MaltSvg } from './icons/MaltSvg';
 
-interface ContactInfo {
-  icon: JSX.Element;
-  title: string;
-  content: string;
-  link: string | null;
-}
-
-const getContactInfo = (t: (key: string) => string): ContactInfo[] => [
-  {
-    icon: <FiMail className='h-6 w-6 text-primary-400' />,
-    title: t('contact.email'),
-    content: 'clement.lucas.dev@gmail.com',
-    link: 'mailto:clement.lucas.dev@gmail.com',
-  },
-  {
-    icon: <FiMapPin className='h-6 w-6 text-secondary-400' />,
-    title: t('contact.location'),
-    content: t('contact.locationValue'),
-    link: null,
-  },
-];
+const EMAIL = 'clement.lucas.dev@gmail.com';
 
 const Contact: FC = () => {
   const { t } = useTranslation();
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const prefersReducedMotion = useReducedMotion();
-  const contactInfo = getContactInfo(t);
 
-  const containerVariants: Variants = {
+  const container: Variants = {
     hidden: { opacity: prefersReducedMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: prefersReducedMotion ? 0 : 0.12 } },
   };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 },
+  const item: Variants = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 24 },
     visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0 : 0.6 } },
   };
 
   return (
-    <section
-      id='contact'
-      className='section bg-gradient-to-b from-zinc-950 to-zinc-900 relative py-16 sm:py-20'
-    >
-      <div className='container px-4 sm:px-6 lg:px-8'>
-        <motion.div
-          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
-          animate={
-            inView
-              ? { opacity: 1, y: 0 }
-              : { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }
-          }
-          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
-          className='text-center mb-12 sm:mb-16'
-        >
-          <h2 className='font-electrolize text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4'>
-            {t('contact.title')} <span className='title-gradient'>{t('contact.titleAccent')}</span>
-          </h2>
-          <p className='text-sm sm:text-base text-gray-400 max-w-2xl mx-auto'>
-            {t('contact.description')}
-          </p>
-        </motion.div>
+    <section id='contact' className='section relative overflow-hidden bg-paper'>
+      {/* soft blob accent */}
+      <div
+        className='blob blob-emerald animate-drift bottom-[-12%] right-[-8%] h-[28rem] w-[28rem]'
+        aria-hidden='true'
+      />
 
+      <div className='container relative z-10'>
         <motion.div
           ref={ref}
-          variants={containerVariants}
+          variants={container}
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
-          className='max-w-2xl mx-auto'
+          className='grid grid-cols-1 gap-12 lg:grid-cols-12'
         >
-          <motion.div variants={itemVariants}>
-            <div className='glass-card p-5 sm:p-6 md:p-8'>
-              <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-4 sm:mb-6'>
-                {t('contact.contactInfo')}
-              </h3>
+          {/* Left: invitation */}
+          <div className='lg:col-span-7'>
+            <motion.span variants={item} className='eyebrow mb-5'>
+              04 — {t('contact.titleAccent')}
+            </motion.span>
+            <motion.h2
+              variants={item}
+              className='font-display text-4xl font-semibold leading-[1.04] tracking-[-0.02em] text-ink md:text-6xl'
+            >
+              {t('contact.title')}{' '}
+              <span className='italic text-emerald-800'>{t('contact.titleAccent')}</span>
+            </motion.h2>
+            <motion.p
+              variants={item}
+              className='mt-6 max-w-xl text-lg leading-relaxed text-ink-soft'
+            >
+              {t('contact.description')}
+            </motion.p>
 
-              <div className='space-y-4 sm:space-y-6'>
-                {contactInfo.map((info, index) => (
-                  <div key={index} className='flex items-start'>
-                    <div className='mt-1 bg-zinc-800/90 rounded-lg p-2 sm:p-3' aria-hidden='true'>
-                      {info.icon}
-                    </div>
-                    <div className='ml-3 sm:ml-4'>
-                      <h4 className='text-xs sm:text-sm font-medium text-gray-400'>{info.title}</h4>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          className='text-sm sm:text-base text-white hover:text-primary-400 transition-colors'
-                          aria-label={`${info.title}: ${info.content}`}
-                        >
-                          {info.content}
-                        </a>
-                      ) : (
-                        <p className='text-sm sm:text-base text-white'>{info.content}</p>
-                      )}
-                    </div>
+            <motion.a
+              variants={item}
+              href={`mailto:${EMAIL}`}
+              className='group mt-9 inline-flex items-center gap-3 font-display text-2xl font-medium text-ink transition-colors hover:text-emerald-800 sm:text-3xl'
+            >
+              <span className='border-b-2 border-coral-500 pb-1'>{EMAIL}</span>
+              <FiArrowUpRight className='h-6 w-6 text-emerald-700 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1' />
+            </motion.a>
+          </div>
+
+          {/* Right: details card */}
+          <motion.div variants={item} className='lg:col-span-5'>
+            <div className='surface p-7 sm:p-8'>
+              <div className='space-y-6'>
+                <div className='flex items-start gap-4'>
+                  <span className='mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-600/10 text-emerald-700'>
+                    <FiMail className='h-5 w-5' />
+                  </span>
+                  <div>
+                    <h4 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                      {t('contact.email')}
+                    </h4>
+                    <a
+                      href={`mailto:${EMAIL}`}
+                      className='text-ink transition-colors hover:text-emerald-800'
+                    >
+                      {EMAIL}
+                    </a>
                   </div>
-                ))}
+                </div>
+
+                <div className='flex items-start gap-4'>
+                  <span className='mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral-500/15 text-coral-700'>
+                    <FiMapPin className='h-5 w-5' />
+                  </span>
+                  <div>
+                    <h4 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                      {t('contact.location')}
+                    </h4>
+                    <p className='text-ink'>{t('contact.locationValue')}</p>
+                  </div>
+                </div>
               </div>
 
-              <div className='mt-8 sm:mt-10'>
-                <h3 className='text-lg sm:text-xl font-electrolize font-semibold mb-3 sm:mb-4'>
+              <div className='mt-8 border-t border-line pt-6'>
+                <h4 className='mb-4 text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
                   {t('contact.followMe')}
-                </h3>
-                <div className='flex space-x-3 sm:space-x-4' aria-label='Social media links'>
+                </h4>
+                <div className='flex gap-2.5' aria-label='Social media links'>
                   <a
                     href={GITHUB_PROFILE_URL}
                     aria-label='Visit my GitHub profile (opens in new tab)'
-                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
+                    className='flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink-soft transition-colors hover:border-emerald-700 hover:bg-emerald-700 hover:text-paper'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <svg
-                      className='h-4 w-4 sm:h-5 sm:w-5'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                      aria-hidden='true'
-                    >
-                      <path
-                        fillRule='evenodd'
-                        d='M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z'
-                        clipRule='evenodd'
-                      ></path>
-                    </svg>
+                    <FiGithub className='h-5 w-5' aria-hidden='true' />
                   </a>
                   <a
                     href={LINKEDIN_PROFILE_URL}
                     aria-label='Visit my LinkedIn profile (opens in new tab)'
-                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
+                    className='flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink-soft transition-colors hover:border-emerald-700 hover:bg-emerald-700 hover:text-paper'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <svg
-                      className='h-4 w-4 sm:h-5 sm:w-5'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                      aria-hidden='true'
-                    >
-                      <path
-                        fillRule='evenodd'
-                        d='M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z'
-                        clipRule='evenodd'
-                      ></path>
-                    </svg>
+                    <FiLinkedin className='h-5 w-5' aria-hidden='true' />
                   </a>
                   <a
                     href={MALT_PROFILE_URL}
                     aria-label='Visit my Malt profile (opens in new tab)'
-                    className='bg-zinc-800 p-2.5 sm:p-3 rounded-lg text-gray-300 hover:text-white hover:bg-primary-600 transition-colors'
+                    className='flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink-soft transition-colors hover:border-emerald-700 hover:bg-emerald-700 hover:text-paper'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <MaltSvg className='h-4 w-4 sm:h-5 sm:w-5' />
+                    <MaltSvg className='h-5 w-5' />
                   </a>
                 </div>
               </div>

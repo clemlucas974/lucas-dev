@@ -90,12 +90,12 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '' }) =
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className='flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-700/50 bg-zinc-800/50 hover:bg-zinc-700/50 transition-all duration-300 backdrop-blur-sm'
+        className='flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1.5 text-ink-soft transition-all duration-300 hover:border-emerald-600/40'
         aria-label='Select language'
         aria-expanded={isOpen}
         aria-haspopup='true'
       >
-        <FiGlobe className='w-4 h-4 text-gray-300' />
+        <FiGlobe className='h-4 w-4 text-taupe' />
         <span className='text-lg translate-y-[1.5px]'>{currentLanguage.flag}</span>
       </button>
 
@@ -110,7 +110,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '' }) =
             transition={
               prefersReducedMotion ? { duration: 0.1 } : { duration: 0.2, ease: 'easeOut' }
             }
-            className='absolute right-0 mt-2 w-48 rounded-xl border border-zinc-700/50 bg-zinc-800/95 backdrop-blur-xl shadow-xl overflow-hidden z-50'
+            className='surface absolute right-0 z-50 mt-2 w-48 overflow-hidden !rounded-2xl'
             role='menu'
             aria-orientation='vertical'
           >
@@ -119,10 +119,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '' }) =
                 <button
                   key={language.code}
                   onClick={() => handleLanguageChange(language.code)}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors duration-200 ${
+                  className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors duration-200 ${
                     currentLanguage.code === language.code
-                      ? 'bg-primary-600/20 text-primary-400'
-                      : 'text-gray-200 hover:bg-zinc-700/50'
+                      ? 'bg-emerald-600/10 text-emerald-800'
+                      : 'text-ink-soft hover:bg-sand'
                   }`}
                   role='menuitem'
                   aria-current={currentLanguage.code === language.code ? 'true' : undefined}
@@ -131,7 +131,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '' }) =
                   <span className='text-sm font-medium'>{language.label}</span>
                   {currentLanguage.code === language.code && (
                     <svg
-                      className='ml-auto w-4 h-4 text-primary-400'
+                      className='ml-auto h-4 w-4 text-emerald-700'
                       fill='none'
                       viewBox='0 0 24 24'
                       stroke='currentColor'

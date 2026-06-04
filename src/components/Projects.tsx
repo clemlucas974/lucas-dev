@@ -1,7 +1,8 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { FiArrowUpRight, FiX } from 'react-icons/fi';
 import { useInView } from 'react-intersection-observer';
 
 import { useReducedMotion } from '../utils/useReducedMotion';
@@ -12,6 +13,8 @@ interface Project {
   description: string;
   details: string;
   image: string;
+  /** optional background class behind the image (for transparent/overlay PNGs) */
+  imageBg?: string;
   technologies: string[];
   link: string;
   datePublished?: string;
@@ -20,11 +23,34 @@ interface Project {
 
 const getProjects = (t: (key: string) => string): Project[] => [
   {
+    id: 8,
+    title: t('projects.items.aromazone.title'),
+    description: t('projects.items.aromazone.description'),
+    details: t('projects.items.aromazone.details'),
+    image: '/aroma-zone.jpg',
+    technologies: ['React Native', 'TypeScript', 'Node.js', 'AI Agent', 'LangGraph', 'AWS'],
+    link: 'https://aroma-zone.com/',
+    datePublished: '2026',
+    client: 'Aroma-Zone',
+  },
+  {
+    id: 7,
+    title: t('projects.items.jinko.title'),
+    description: t('projects.items.jinko.description'),
+    details: t('projects.items.jinko.details'),
+    image: '/jinko.jpg',
+    technologies: ['ReactJS', 'Tailwind CSS', 'OpenAI Apps SDK', 'TypeScript', 'ChatGPT'],
+    link: 'https://gojinko.com/',
+    datePublished: '2025',
+    client: 'Jinko',
+  },
+  {
     id: 1,
     title: t('projects.items.naruto.title'),
     description: t('projects.items.naruto.description'),
     details: t('projects.items.naruto.details'),
-    image: '/naruto-ninja-cards.webp',
+    image: '/naruto-cards.png',
+    imageBg: 'bg-gradient-to-br from-shell via-sand to-honey-200',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
     datePublished: '2025',
@@ -121,100 +147,67 @@ const Projects: FC = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const prefersReducedMotion = useReducedMotion();
   const projects = getProjects(t);
 
-  // Handle escape key and focus management for modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && activeProject) {
-        setActiveProject(null);
-      }
+      if (e.key === 'Escape' && activeProject) setActiveProject(null);
     };
-
     if (activeProject) {
       document.addEventListener('keydown', handleEscape);
-      // Focus close button when modal opens
       closeButtonRef.current?.focus();
-      // Prevent body scroll
       document.body.style.overflow = 'hidden';
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
   }, [activeProject]);
 
-  const containerVariants = {
+  const container = {
     hidden: { opacity: prefersReducedMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.2,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: prefersReducedMotion ? 0 : 0.12 } },
   };
-
-  const itemVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 30 },
+  const item = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 28 },
     visible: { opacity: 1, y: 0, transition: { duration: prefersReducedMotion ? 0 : 0.6 } },
   };
 
-  const modalVariants = {
-    initial: { opacity: prefersReducedMotion ? 1 : 0, scale: prefersReducedMotion ? 1 : 0.9 },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: prefersReducedMotion ? 0 : 0, scale: prefersReducedMotion ? 1 : 0.9 },
-  };
-
   return (
-    <section id='projects' className='section bg-gradient-radial from-zinc-950 to-black relative'>
+    <section id='projects' className='section bg-shell'>
       <div className='container'>
         <motion.div
           initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
-          animate={
-            inView
-              ? { opacity: 1, y: 0 }
-              : { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }
-          }
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
-          className='text-center mb-16'
+          className='max-w-2xl'
         >
-          <h2 className='font-electrolize text-3xl md:text-4xl font-bold mb-4'>
+          <span className='eyebrow mb-5'>03 — {t('projects.titleAccent')}</span>
+          <h2 className='font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-ink md:text-5xl'>
             {t('projects.title')}{' '}
-            <span className='title-gradient'>{t('projects.titleAccent')}</span>
+            <span className='italic text-emerald-800'>{t('projects.titleAccent')}</span>
           </h2>
-          <p className='text-gray-400 max-w-3xl mx-auto'>{t('projects.description')}</p>
+          <p className='mt-5 text-lg leading-relaxed text-ink-soft'>{t('projects.description')}</p>
         </motion.div>
 
         <motion.div
           ref={ref}
-          variants={containerVariants}
+          variants={container}
           initial='hidden'
           animate={inView ? 'visible' : 'hidden'}
-          className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+          className='mt-14 grid grid-cols-1 gap-7 md:grid-cols-2'
           aria-label='Portfolio projects'
         >
           {projects.map((project) => (
             <motion.article
               aria-label={`View details of ${project.title}`}
-              aria-describedby={`${project.title} description`}
               key={project.id}
-              variants={itemVariants}
-              whileHover={
-                prefersReducedMotion
-                  ? {}
-                  : {
-                      y: -10,
-                      transition: { duration: 0.3 },
-                    }
-              }
+              variants={item}
+              whileHover={prefersReducedMotion ? {} : { y: -8 }}
               onClick={() => setActiveProject(project)}
-              className='glass-card group overflow-hidden cursor-pointer relative'
+              className='surface group cursor-pointer overflow-hidden'
               itemScope
               itemType='https://schema.org/CreativeWork'
             >
@@ -225,135 +218,135 @@ const Projects: FC = () => {
               )}
               {project.client && <meta itemProp='creator' content={project.client} />}
 
-              <div className='h-48 overflow-hidden'>
+              <div
+                className={`relative m-2 h-52 overflow-hidden rounded-2xl ${project.imageBg ?? ''}`}
+              >
                 <img
                   src={project.image}
                   alt={`${project.title} - ${project.description}`}
-                  className='w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110'
+                  className='h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105'
+                  loading='lazy'
                   itemProp='image'
                 />
+                <span className='absolute right-3 top-3 rounded-full bg-paper/85 px-2.5 py-1 text-xs font-medium text-ink-soft backdrop-blur-sm'>
+                  {project.datePublished}
+                </span>
               </div>
-              <div className='p-6'>
-                <h3 className='text-xl font-electrolize font-semibold mb-2 text-white'>
-                  {project.title}
-                </h3>
-                <p className='text-gray-400 mb-4 line-clamp-2'>{project.description}</p>
-                <div className='flex flex-wrap gap-2 mb-6'>
+
+              <div className='p-6 pt-4'>
+                <div className='mb-3 flex items-center justify-between'>
+                  <span className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                    {project.client}
+                  </span>
+                  <FiArrowUpRight className='h-5 w-5 text-taupe transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-700' />
+                </div>
+                <h3 className='mb-2 font-display text-2xl font-medium text-ink'>{project.title}</h3>
+                <p className='mb-5 line-clamp-2 leading-relaxed text-ink-soft'>
+                  {project.description}
+                </p>
+                <div className='flex flex-wrap gap-2'>
                   {project.technologies.slice(0, 4).map((tech) => (
-                    <span key={tech} className='tech-pill'>
+                    <span key={tech} className='chip'>
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className='tech-pill'>+{project.technologies.length - 4}</span>
+                    <span className='chip'>+{project.technologies.length - 4}</span>
                   )}
-                </div>
-              </div>
-              {/* Blur overlay with eye icon - covers entire card */}
-              <div className='absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
-                <div className='text-white text-center'>
-                  <svg
-                    className='w-12 h-12 mx-auto mb-2'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
-                    aria-hidden='true'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
-                    />
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'
-                    />
-                  </svg>
-                  <p className='text-sm font-medium'>{t('projects.viewDetails')}</p>
                 </div>
               </div>
             </motion.article>
           ))}
         </motion.div>
+      </div>
 
+      <AnimatePresence>
         {activeProject && (
-          <div
-            className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm'
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-sm'
             role='dialog'
             aria-modal='true'
             aria-labelledby='project-modal-title'
             aria-describedby='project-modal-description'
             ref={modalRef}
             onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setActiveProject(null);
-              }
+              if (e.target === e.currentTarget) setActiveProject(null);
             }}
           >
             <motion.div
-              variants={modalVariants}
-              initial='initial'
-              animate='animate'
-              exit='exit'
-              className='bg-zinc-900 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto'
+              initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className='max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-line bg-paper'
             >
-              <div className='h-56 md:h-72 overflow-hidden'>
+              <div
+                className={`relative m-3 h-56 overflow-hidden rounded-2xl md:h-72 ${activeProject.imageBg ?? ''}`}
+              >
                 <img
                   src={activeProject.image}
                   alt={`${activeProject.title} project screenshot`}
-                  className='w-full h-full object-cover object-center'
+                  className='h-full w-full object-cover object-center'
                 />
+                <button
+                  ref={closeButtonRef}
+                  onClick={() => setActiveProject(null)}
+                  className='absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-paper/90 text-ink shadow-sm transition-colors hover:bg-paper'
+                  aria-label={t('projects.close')}
+                >
+                  <FiX className='h-5 w-5' />
+                </button>
               </div>
               <div className='p-6 md:p-8'>
+                <div className='mb-2 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                  <span>{activeProject.client}</span>
+                  <span className='h-1 w-1 rounded-full bg-coral-600' />
+                  <span>{activeProject.datePublished}</span>
+                </div>
                 <h3
                   id='project-modal-title'
-                  className='text-2xl font-electrolize font-bold mb-4 text-white'
+                  className='mb-4 font-display text-3xl font-semibold text-ink'
                 >
                   {activeProject.title}
                 </h3>
-                <p id='project-modal-description' className='text-gray-300 mb-6'>
+                <p id='project-modal-description' className='mb-6 leading-relaxed text-ink-soft'>
                   {activeProject.details}
                 </p>
-                <div className='mb-6'>
-                  <h4 className='text-sm uppercase text-gray-500 mb-3 tracking-wider font-medium'>
+                <div className='mb-7'>
+                  <h4 className='mb-3 text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
                     {t('projects.technologies')}
                   </h4>
                   <div className='flex flex-wrap gap-2' aria-label='Technologies used'>
                     {activeProject.technologies.map((tech) => (
-                      <span key={tech} className='tech-pill'>
+                      <span key={tech} className='chip'>
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className='flex justify-end space-x-4'>
-                  <button
-                    ref={closeButtonRef}
-                    onClick={() => setActiveProject(null)}
-                    className='button-outline'
-                    aria-label={t('projects.close')}
-                  >
+                <div className='flex justify-end gap-3'>
+                  <button onClick={() => setActiveProject(null)} className='btn-ghost'>
                     {t('projects.close')}
                   </button>
                   <a
                     href={activeProject.link}
-                    className='button-primary'
+                    className='btn-primary'
                     target='_blank'
                     rel='noopener noreferrer'
                     aria-label={`${t('projects.visitProject')} ${activeProject.title} (opens in new tab)`}
                   >
                     {t('projects.visitProject')}
+                    <FiArrowUpRight className='h-4 w-4' />
                   </a>
                 </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </section>
   );
 };

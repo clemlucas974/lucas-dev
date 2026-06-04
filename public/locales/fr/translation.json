@@ -72,6 +72,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "devops": "DevOps",
+      "ai": "IA",
       "other": "Autres"
     }
   },
@@ -84,6 +85,16 @@
     "close": "Fermer",
     "visitProject": "Visiter le projet",
     "items": {
+      "aromazone": {
+        "title": "Aroma-Zone",
+        "description": "Application mobile, storefront et backend pour le leader des cosmétiques naturels — et un agent IA expert.",
+        "details": "Développement de l'application mobile d'Aroma-Zone, du storefront e-commerce et de tout le backend lié. Réalisation du MVP d'un System Agent IA expert Aroma-Zone pour guider les clients à travers les huiles essentielles, les cosmétiques et le bien-être naturel."
+      },
+      "jinko": {
+        "title": "Jinko",
+        "description": "Jinko transforme votre envie de voyager en un voyage réservable dans ChatGPT.",
+        "details": "Développement de la première version de la ChatGPT Widget App (ReactJS, Tailwind, OpenAI Apps SDK) en 2025, apportant la recherche et la réservation de voyages directement dans la conversation ChatGPT."
+      },
       "naruto": {
         "title": "Naruto Ninja Cards",
         "description": "La seule collection numérique officielle de Naruto.",
