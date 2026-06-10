@@ -13,6 +13,8 @@ interface Project {
   description: string;
   details: string;
   image: string;
+  imageW: number;
+  imageH: number;
   /** optional background class behind the image (for transparent/overlay PNGs) */
   imageBg?: string;
   technologies: string[];
@@ -27,7 +29,9 @@ const getProjects = (t: (key: string) => string): Project[] => [
     title: t('projects.items.aromazone.title'),
     description: t('projects.items.aromazone.description'),
     details: t('projects.items.aromazone.details'),
-    image: '/aroma-zone.jpg',
+    image: '/aroma-zone.webp',
+    imageW: 960,
+    imageH: 603,
     technologies: ['React Native', 'TypeScript', 'Node.js', 'AI Agent', 'LangGraph', 'AWS'],
     link: 'https://aroma-zone.com/',
     datePublished: '2026',
@@ -38,9 +42,11 @@ const getProjects = (t: (key: string) => string): Project[] => [
     title: t('projects.items.jinko.title'),
     description: t('projects.items.jinko.description'),
     details: t('projects.items.jinko.details'),
-    image: '/jinko.jpg',
+    image: '/jinko.webp',
+    imageW: 1280,
+    imageH: 800,
     technologies: ['ReactJS', 'Tailwind CSS', 'OpenAI Apps SDK', 'TypeScript', 'ChatGPT'],
-    link: 'https://gojinko.com/',
+    link: 'https://gojinko.com/chatgpt',
     datePublished: '2025',
     client: 'Jinko',
   },
@@ -49,7 +55,9 @@ const getProjects = (t: (key: string) => string): Project[] => [
     title: t('projects.items.naruto.title'),
     description: t('projects.items.naruto.description'),
     details: t('projects.items.naruto.details'),
-    image: '/naruto-cards.png',
+    image: '/naruto-cards.webp',
+    imageW: 1022,
+    imageH: 528,
     imageBg: 'bg-gradient-to-br from-shell via-sand to-honey-200',
     technologies: ['React', 'Next.JS', 'TypeScript', 'Go', 'AWS', 'MongoDB', 'Nakama', 'Docker'],
     link: 'https://app.narutoninjacards.com',
@@ -62,6 +70,8 @@ const getProjects = (t: (key: string) => string): Project[] => [
     description: t('projects.items.bam.description'),
     details: t('projects.items.bam.details'),
     image: '/bam-karaoke-box.webp',
+    imageW: 1140,
+    imageH: 757,
     technologies: ['NestJS', 'PostgreSQL', 'Redis', 'AWS', 'Terraform', 'GraphQL'],
     link: 'https://booking.bam-karaokebox.com/paris',
     datePublished: '2024',
@@ -73,6 +83,8 @@ const getProjects = (t: (key: string) => string): Project[] => [
     description: t('projects.items.popchef.description'),
     details: t('projects.items.popchef.details'),
     image: '/popchef.webp',
+    imageW: 800,
+    imageH: 799,
     technologies: ['React', 'TypeScript', 'React Native', 'Kubernetes', 'Terraform', 'AWS'],
     link: 'https://www.popchef.com',
     datePublished: '2023',
@@ -84,6 +96,8 @@ const getProjects = (t: (key: string) => string): Project[] => [
     description: t('projects.items.quitoque.description'),
     details: t('projects.items.quitoque.details'),
     image: '/quitoque.webp',
+    imageW: 512,
+    imageH: 465,
     technologies: [
       'React',
       'React-Native',
@@ -108,6 +122,8 @@ const getProjects = (t: (key: string) => string): Project[] => [
     description: t('projects.items.fastory.description'),
     details: t('projects.items.fastory.details'),
     image: '/fastory.webp',
+    imageW: 2040,
+    imageH: 1148,
     technologies: [
       'React',
       'NodeJS',
@@ -127,6 +143,8 @@ const getProjects = (t: (key: string) => string): Project[] => [
     description: t('projects.items.swimbot.description'),
     details: t('projects.items.swimbot.details'),
     image: '/swimbot.webp',
+    imageW: 643,
+    imageH: 362,
     technologies: [
       'Android',
       'Java',
