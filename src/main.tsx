@@ -2,14 +2,13 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import { Analytics } from '@vercel/analytics/react';
-
 import '@fontsource-variable/fraunces/wght-italic.css';
+import '@fontsource/electrolize/400.css';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
 import '@fontsource/space-grotesk/700.css';
-import '@fontsource/electrolize/400.css';
+import { Analytics } from '@vercel/analytics/react';
 
 import App from './App';
 import './fonts.css';
