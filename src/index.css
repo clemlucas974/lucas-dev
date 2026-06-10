@@ -39,7 +39,7 @@
     /* Warm ink */
     --ink: 30 18% 11%; /* #211C16 espresso near-black */
     --ink-soft: 32 14% 26%; /* #4A4034 */
-    --taupe: 35 12% 47%; /* #897D6B muted */
+    --taupe: 35 12% 38%; /* #6F6454 — AA contrast on sand */
     --line: 38 30% 84%; /* #E6DCCB hairline */
 
     /* Brand (retained) */
@@ -89,7 +89,7 @@
   h1,
   h2,
   h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;
     font-optical-sizing: auto;
   }
 

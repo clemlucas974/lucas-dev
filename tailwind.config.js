@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['Space Grotesk', 'Space Grotesk Fallback', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Fraunces Variable', 'Fraunces Fallback', 'Georgia', 'serif'],
         electrolize: ['Electrolize', 'sans-serif'],
         portiso: ['Portiso', 'sans-serif'],
       },

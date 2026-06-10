@@ -22,6 +22,9 @@ const Hero: FC = () => {
           animate: { opacity: 1, y: 0, transition: { duration: 0.9, delay, ease } },
         };
 
+  // LCP element: visible immediately — no JS-gated opacity
+  const lcpVisible = { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 } };
+
   const orbitTech = ['TypeScript', 'Python', 'AI', 'System Architecture', 'Agentic Systems'];
 
   return (
@@ -54,7 +57,7 @@ const Hero: FC = () => {
 
             <motion.h1
               id='hero-heading'
-              {...rise(0.12)}
+              {...lcpVisible}
               className='font-display text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.02em] text-ink sm:text-6xl lg:text-7xl'
             >
               {t('hero.heading.part1')}{' '}
@@ -97,15 +100,11 @@ const Hero: FC = () => {
               className='mt-9 flex flex-wrap justify-center gap-3 lg:justify-start'
               aria-label='Main navigation'
             >
-              <a
-                href='#projects'
-                className='btn-primary'
-                aria-label={t('hero.ariaLabels.projects')}
-              >
+              <a href='#projects' className='btn-primary'>
                 {t('hero.viewProjects')}
                 <FiArrowDownRight className='h-4 w-4' aria-hidden='true' />
               </a>
-              <a href='#contact' className='btn-ghost' aria-label={t('hero.ariaLabels.contact')}>
+              <a href='#contact' className='btn-ghost'>
                 {t('hero.contactMe')}
               </a>
             </motion.nav>

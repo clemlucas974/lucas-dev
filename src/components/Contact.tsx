@@ -79,9 +79,9 @@ const Contact: FC = () => {
                     <FiMail className='h-5 w-5' />
                   </span>
                   <div>
-                    <h4 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                    <h3 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
                       {t('contact.email')}
-                    </h4>
+                    </h3>
                     <a
                       href={`mailto:${EMAIL}`}
                       className='text-ink transition-colors hover:text-emerald-800'
@@ -96,18 +96,18 @@ const Contact: FC = () => {
                     <FiMapPin className='h-5 w-5' />
                   </span>
                   <div>
-                    <h4 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                    <h3 className='text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
                       {t('contact.location')}
-                    </h4>
+                    </h3>
                     <p className='text-ink'>{t('contact.locationValue')}</p>
                   </div>
                 </div>
               </div>
 
               <div className='mt-8 border-t border-line pt-6'>
-                <h4 className='mb-4 text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
+                <h3 className='mb-4 text-xs font-medium uppercase tracking-[0.18em] text-taupe'>
                   {t('contact.followMe')}
-                </h4>
+                </h3>
                 <div className='flex gap-2.5' aria-label='Social media links'>
                   <a
                     href={GITHUB_PROFILE_URL}
